@@ -1,0 +1,36 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/fonts.scss";
+@import "./../../styles/general.scss";
+@import "./../../styles/animations.scss";
+.challengesContainer {
+  background-color: $blue;
+  margin-bottom: 20px;
+}
+.challengesHeader {
+  color: white;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 15px;
+  padding: 10px;
+}
+
+.challengesBody {
+  padding: 20px;
+}
+
+.challenge {
+  color: $beige;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.challengeText {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.challengeProgressBar {
+  flex: 1;
+  height: 10px;
+  margin-right: 20px;
+}

@@ -1,0 +1,31 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/fonts.scss";
+@import "./../../styles/general.scss";
+
+.selectModalContainer {
+  padding: 40px;
+  margin: 20px;
+  background-color: $darkgrey;
+  border-radius: 15px;
+  color: white;
+}
+.formContainer {
+  border-radius: 15px;
+  background-color: white;
+  padding: 40px;
+  margin: 20px;
+}
+
+.formComponent {
+  margin: 20px;
+}
+.dropzone {
+  padding: 40px;
+  background-color: lightgrey;
+  border-radius: 15px;
+}
+
+.dropzoneImage {
+  width: 50px;
+  height: 50px;
+}

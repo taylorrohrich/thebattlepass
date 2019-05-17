@@ -1,0 +1,92 @@
+const initialState = {
+  seasonNumber: null,
+  selected: null,
+  events: null
+};
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case "SWITCH_TOGGLE": {
+      const { index } = action,
+        events = state.events,
+        newEvents = events.reduce((acc, event, i) => {
+          return acc.concat({ ...event, toggle: i === index && !event.toggle });
+        }, []);
+      return {
+        ...state,
+        events: newEvents
+      };
+    }
+    case "SWITCH_SELECTED": {
+      const { keyOne, keyTwo } = action,
+        { selected } = state,
+        selectedEvent = selected[keyOne];
+      if (!keyTwo) {
+        const toggleSelected = !selectedEvent.selected,
+          newSelectedEvent = Object.keys(selectedEvent).reduce((acc, key) => {
+            if (key === "selected") {
+              return { ...acc, [key]: toggleSelected };
+            }
+            return {
+              ...acc,
+              [key]: { ...selectedEvent[key], selected: toggleSelected }
+            };
+          }, {});
+        const newSelected = { ...selected, [keyOne]: newSelectedEvent };
+        return {
+          ...state,
+          selected: newSelected
+        };
+      }
+      const selectedChallenge = selectedEvent[keyTwo],
+        toggleSelected = !selectedChallenge.selected,
+        newSelectedChallenge = {
+          ...selectedChallenge,
+          selected: toggleSelected
+        };
+      const newSelectedEvent = {
+        ...selectedEvent,
+        [keyTwo]: newSelectedChallenge
+      };
+      const toggleWeek =
+        Object.keys(newSelectedEvent).filter(key => {
+          return (
+            newSelectedEvent[key] !== "selected" &&
+            newSelectedEvent[key].selected === false
+          );
+        }).length === 0;
+      const newSelected = {
+        ...selected,
+        [keyOne]: { ...newSelectedEvent, selected: toggleWeek }
+      };
+      return {
+        ...state,
+        selected: newSelected
+      };
+    }
+    case "SET_SELECTED": {
+      const { selected } = action;
+      return {
+        ...state,
+        selected
+      };
+    }
+    case "SET_SEASON": {
+      const { selected, events, seasonNumber } = action;
+      return {
+        ...state,
+        selected,
+        events,
+        seasonNumber
+      };
+    }
+    case "SET_SEASON_NUMBER": {
+      const { seasonNumber } = action;
+      return {
+        ...state,
+        seasonNumber
+      };
+    }
+    default:
+      return state;
+  }
+};

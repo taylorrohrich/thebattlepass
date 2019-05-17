@@ -1,0 +1,29 @@
+@import "./../../styles/colors.scss";
+@import "./../../styles/fonts.scss";
+@import "./../../styles/general.scss";
+
+.seasonBody {
+  padding: 20px;
+  background-color: #35353a;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  overflow: scroll;
+}
+.seasonContent {
+  background-color: $blue;
+  padding: 20px;
+  border-radius: 10px;
+}
+.eventsContainer {
+  background-color: $lightblue3;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+  overflow: scroll;
+}
+.mapContainer {
+  background-color: $lightblue3;
+  padding: 20px;
+  margin: 10px;
+  border-radius: 10px;
+}

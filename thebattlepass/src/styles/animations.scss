@@ -1,0 +1,32 @@
+.rotate-enter {
+  transform: rotate(0deg);
+}
+.rotate-enter-active {
+  transform: rotate(-90deg);
+  transition: transform 500ms;
+}
+.rotate-enter-done {
+  transform: rotate(-90deg);
+}
+.rotate-exit {
+  transform: rotate(-90deg);
+}
+.rotate-exit-active {
+  transform: rotate(0deg);
+  transition: transform 500ms;
+}
+
+.slide-enter {
+  opacity: 0;
+}
+.slide-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.slide-exit {
+  opacity: 1;
+}
+.slide-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
+}
