@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { Image } from "./../generic";
+
 import "./header.scss";
-const Header = props => {
+
+const Header = () => {
   return (
     <div className="flex-row flex-start headerContainer">
       <Link to="/">

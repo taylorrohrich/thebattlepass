@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import "./routes.scss";
 
-const Error = props => {
+const Error = () => {
   return (
     <div className="flex-one align-center flex-column justify-center color-white">
       <div className="xl">Something went wrong...</div>

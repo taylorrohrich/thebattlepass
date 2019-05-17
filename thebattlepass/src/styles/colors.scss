@@ -1,5 +1,5 @@
-$lightblue2: #3190ea;
 $lightblue1: #3f6cac;
+$lightblue2: #3190ea;
 $lightblue3: #25264e;
 $blue: #21397f;
 $darkblue1: #004aa1;
@@ -8,13 +8,17 @@ $darkblue3: #00034f;
 $darkblue4: #02032c;
 $beige: #9dc5ff;
 $white: #ffffff;
-$darkgrey: #161616;
+$darkgrey1: #161616;
+$darkgrey2: #35353a;
 
 .background-lightblue1 {
   background-color: $lightblue1;
 }
 .background-lightblue2 {
   background-color: $lightblue2;
+}
+.background-lightblue3 {
+  background-color: $lightblue3;
 }
 .background-blue {
   background-color: $blue;
@@ -28,11 +32,17 @@ $darkgrey: #161616;
 .background-darkblue3 {
   background-color: $darkblue3;
 }
+.background-darkblue4 {
+  background-color: $darkblue3;
+}
 .background-beige {
   background-color: $beige;
 }
-.background-darkgrey {
-  background-color: $darkgrey;
+.background-darkgrey1 {
+  background-color: $darkgrey1;
+}
+.background-darkgrey2 {
+  background-color: $darkgrey2;
 }
 
 .color-lightblue1 {
@@ -41,15 +51,33 @@ $darkgrey: #161616;
 .color-lightblue2 {
   color: $lightblue2;
 }
+.color-lightblue3 {
+  color: $lightblue3;
+}
 .color-blue {
   color: $blue;
 }
 .color-darkblue1 {
   color: $darkblue1;
 }
+.color-darkblue2 {
+  color: $darkblue2;
+}
+.color-darkblue3 {
+  color: $darkblue3;
+}
+.color-darkblue4 {
+  color: $darkblue4;
+}
 .color-beige {
   color: $beige;
 }
 .color-white {
   color: white;
+}
+.color-darkgrey1 {
+  color: $darkgrey1;
+}
+.color-darkgrey2 {
+  color: $darkgrey2;
 }

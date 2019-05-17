@@ -1,7 +1,8 @@
 import React from "react";
 
 import { Image } from "./../generic";
-import Challenge from "./Challenge";
+import { mapChallenges } from "./../../utils";
+
 import "./challenges.scss";
 
 const getHeader = header => {
@@ -14,38 +15,6 @@ const getHeader = header => {
       </div>
     </div>
   );
-};
-const mapChallenges = (challenges, type, selected, switchSelected, style) => {
-  return challenges.map((challenge, index) => {
-    const {
-      title,
-      count,
-      color,
-      rewardCount,
-      rewardType,
-      stage,
-      total,
-      keyOne,
-      keyTwo
-    } = challenge;
-    const isSelected = selected[keyOne][keyTwo].selected;
-    return (
-      <Challenge
-        key={`challenge-${index}`}
-        title={title}
-        count={count}
-        color={color}
-        rewardCount={rewardCount}
-        rewardType={rewardType}
-        type={type}
-        stage={stage}
-        total={total}
-        isSelected={isSelected}
-        style={style}
-        callback={() => switchSelected(keyOne, keyTwo)}
-      />
-    );
-  });
 };
 const ChallengeCollection = props => {
   const { challenges, header, type, selected, switchSelected, style } = props;

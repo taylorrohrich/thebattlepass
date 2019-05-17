@@ -1,6 +1,8 @@
 import React from "react";
 import { Form } from "../../generic";
+
 import { getDefaultState, getEntryName, getComponents } from "./../../../utils";
+
 import "./../moderator.scss";
 
 class Tab extends React.Component {

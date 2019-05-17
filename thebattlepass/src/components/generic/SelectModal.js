@@ -1,11 +1,11 @@
 import React from "react";
-
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+
 import "./generic.scss";
 
 const mapMenuItems = values => {
@@ -55,10 +55,7 @@ class SelectModal extends React.Component {
         </div>
 
         <Dialog open={open} disableBackdropClick disableEscapeKeyDown>
-          <DialogContent
-            style={{ width: 500, height: 500 }}
-            className=" flex-one flex-column"
-          >
+          <DialogContent className="selectModal flex-one flex-column">
             {mapSelects(selects)}
           </DialogContent>
         </Dialog>

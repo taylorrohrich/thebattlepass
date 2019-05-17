@@ -1,6 +1,8 @@
 import React from "react";
+
 import "./footer.scss";
-const Footer = props => {
+
+const Footer = () => {
   return (
     <div className="footerContainer flex-column justify-space-between">
       <div className="footerItem flex-one flex-column justify-center">

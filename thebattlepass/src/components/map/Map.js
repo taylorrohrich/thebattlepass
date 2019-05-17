@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+
 import { updateMapWidth, mapRender, init } from "./../../utils";
 import apiRequest from "./../../api";
+
 import "./map.scss";
 
 class Map extends Component {

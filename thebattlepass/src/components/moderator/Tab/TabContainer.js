@@ -1,6 +1,8 @@
 import { connect } from "react-redux";
 import { moderator } from "../../../redux/actions";
+
 import Tab from "./Tab";
+
 const { addEntries, updateEntry } = moderator;
 const actionCreators = {
   addEntries,

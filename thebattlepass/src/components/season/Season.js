@@ -4,6 +4,7 @@ import Challenges from "../challenges";
 import Map from "./../map";
 import { getSelectedEvents, updateMapWidth } from "./../../utils";
 import apiRequest from "./../../api";
+
 import "./season.scss";
 
 const mapEvents = (events, seasonNumber) => {
@@ -65,7 +66,7 @@ class Season extends React.Component {
       return <div />;
     }
     return (
-      <div className=" flex-column flex-one">
+      <div className="flex-column flex-one">
         <SeasonBody seasonNumber={seasonNumber} events={events} width={width} />
       </div>
     );

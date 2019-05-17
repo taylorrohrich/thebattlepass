@@ -1,7 +1,9 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
+
 import { Image } from "./../generic";
 import { template } from "./../../styles";
+
 import "./challenges.scss";
 
 const ChallengesHeader = props => {

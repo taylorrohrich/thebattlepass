@@ -1,12 +1,16 @@
 const colors = {
+  lightblue1: "#3f6cac",
   lightblue2: "#3190ea",
-  lightblue1: "#2777e8",
+  lightblue3: "#25264e",
   blue: "#21397f",
   darkblue1: "#004aa1",
   darkblue2: "#0f1f6a",
   darkblue3: "#00034f",
+  darkblue4: "#02032c",
   beige: "#9dc5ff",
-  white: "#ffffff"
+  white: "#ffffff",
+  darkgrey1: "#161616",
+  darkgrey2: "#35353a"
 };
 const template = {
   default: [

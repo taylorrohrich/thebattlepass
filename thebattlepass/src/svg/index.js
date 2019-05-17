@@ -1,4 +1,5 @@
 import React from "react";
+
 const getShape = (shape, color) => {
   let svg = null;
   switch (shape) {
@@ -49,7 +50,7 @@ const svg = props => {
       width={`${dimension}px`}
       height={`${dimension}px`}
       viewBox={svgShape.viewBox}
-      transform={`rotate(${rotate || 90})`}
+      transform={`rotate(${rotate || 0})`}
     >
       <g>
         <g>{svgShape.path}</g>

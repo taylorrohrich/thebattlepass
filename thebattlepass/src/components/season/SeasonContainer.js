@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import apiRequest from "../../api";
 import Season from "./Season";
 import { season, map } from "../../redux/actions";

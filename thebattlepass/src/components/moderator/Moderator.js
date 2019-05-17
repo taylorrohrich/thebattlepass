@@ -1,10 +1,12 @@
 import React from "react";
+
 import Tab from "./Tab";
 import Map from "./../map";
 import { SelectModal } from "./../generic";
 import apiRequest from "./../../api";
 
 import "./moderator.scss";
+
 const getTab = (tab, event, events, updateEvent) => {
   if (tab === "challenges" && !event) {
     return (

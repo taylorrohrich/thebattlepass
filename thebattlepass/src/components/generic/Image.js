@@ -1,7 +1,9 @@
 import React from "react";
+
 import images from "./../../images";
 import Svg from "./../../svg";
 import { colors } from "./../../styles";
+
 const Image = props => {
   const {
     dimension,

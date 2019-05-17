@@ -1,4 +1,5 @@
 import { getSelectedEvents } from "./season";
+import { mapChallenges, mapChallengeCollections } from "./challenges";
 import { updateMapWidth, generateMarkers, mapRender, init } from "./map";
 import { wrapComponent } from "./general";
 import {
@@ -9,6 +10,8 @@ import {
 } from "./moderator";
 export {
   getSelectedEvents,
+  mapChallenges,
+  mapChallengeCollections,
   updateMapWidth,
   wrapComponent,
   getDefaultState,
