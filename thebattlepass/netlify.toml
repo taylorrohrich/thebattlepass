@@ -3,8 +3,8 @@
 
 [build]
   # This is the directory to change to before starting a build.
-  base    = "website/"
-  publish = "website/build"
+  base    = "thebattlepass/"
+  publish = "thebattlepass/build"
 
 
 [[redirects]]
