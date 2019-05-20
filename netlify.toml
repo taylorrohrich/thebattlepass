@@ -10,7 +10,9 @@
 [[redirects]]
   from = "/api/*"
   to = "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
-
+  status = 200
+  force = true
+  
 
 [[redirects]]
   from = "/*"
