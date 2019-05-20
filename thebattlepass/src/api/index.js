@@ -7,10 +7,9 @@ const apiRequest = async ({ name, body, parameters, formData }) => {
   } else {
     const method = routes[name][1],
       websiteUrl =
-        "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod",
-      // process.env.NODE_ENV === "development"
-      //   ? "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
-      //   : "/api",
+        process.env.NODE_ENV === "development"
+          ? "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
+          : "/api",
       url = websiteUrl + routes[name][0],
       data = formData ? formDataBody({ name, formData }) : body,
       config = formData
@@ -35,47 +34,6 @@ const formDataBody = ({ name, formData }) => {
   forEach(formData, (value, key) => bodyFormData.set(key, value));
   return bodyFormData;
 };
-
-const resources = [
-  {
-    id: 1,
-    title: "cat1",
-    width: 25,
-    height: 25,
-    url:
-      "https://images.pexels.com/photos/259803/pexels-photo-259803.jpeg?cs=srgb&dl=adorable-animal-animal-photography-259803.jpg&fm=jpg"
-  },
-  {
-    id: 2,
-    title: "cat2",
-    width: 25,
-    height: 25,
-    url:
-      "https://images.pexels.com/photos/259803/pexels-photo-259803.jpeg?cs=srgb&dl=adorable-animal-animal-photography-259803.jpg&fm=jpg"
-  },
-  {
-    id: 3,
-    title: "cat3",
-    width: 25,
-    height: 25,
-    url:
-      "https://images.pexels.com/photos/259803/pexels-photo-259803.jpeg?cs=srgb&dl=adorable-animal-animal-photography-259803.jpg&fm=jpg"
-  }
-];
-const seasonList = [
-  {
-    number: 9,
-    id: 1
-  },
-  {
-    number: 10,
-    id: 2
-  },
-  {
-    number: 11,
-    id: 3
-  }
-];
 const routes = {
   getEvents: ["/events", "GET"],
   getResources: ["/resources", "GET"],
