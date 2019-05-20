@@ -1,8 +1,10 @@
 import React from "react";
+
 import Navbar from "./../components/navbar";
 import Footer from "./../components/footer";
 import Header from "./../components/header";
 import Disqus from "./../components/disqus";
+
 import "./utils.scss";
 
 const wrapComponent = (Component, disqus) => {

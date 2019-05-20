@@ -1,4 +1,5 @@
 import React from "react";
+import netlifyIdentity from "netlify-identity-widget";
 import {
   BrowserRouter as Router,
   Switch,
@@ -9,7 +10,8 @@ import {
 import Season from "./../season";
 import Moderator from "./../moderator";
 import Error from "./Error";
-import { wrapComponent } from "./../../utils";
+import Authentication from "./../authentication";
+import { wrapComponent, PrivateRoute } from "./../../utils";
 
 class Routes extends React.Component {
   componentDidMount() {
@@ -33,11 +35,12 @@ class Routes extends React.Component {
               path="/season/:number?"
               component={wrapComponent(Season, true)}
             />
-            <Route
+            <PrivateRoute
               exact
               path="/moderator/"
               component={wrapComponent(Moderator)}
             />
+            <Route exact path="/login" component={Authentication} />
             <Route component={Error} />
           </Switch>
         </Router>

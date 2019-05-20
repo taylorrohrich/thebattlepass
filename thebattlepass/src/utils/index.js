@@ -1,5 +1,6 @@
 import { getSelectedEvents } from "./season";
 import { mapChallenges, mapChallengeCollections } from "./challenges";
+import { PrivateRoute, netlifyAuth } from "./routes";
 import { updateMapWidth, generateMarkers, mapRender, init } from "./map";
 import { wrapComponent } from "./general";
 import {
@@ -22,5 +23,7 @@ export {
   generateMarkers,
   mapRender,
   init,
-  getId
+  getId,
+  PrivateRoute,
+  netlifyAuth
 };
