@@ -6,7 +6,8 @@ import {
   getDefaultState,
   getEntryName,
   getNewStages,
-  getComponents
+  getComponents,
+  getId
 } from "./moderator";
 export {
   getSelectedEvents,
@@ -20,5 +21,6 @@ export {
   getComponents,
   generateMarkers,
   mapRender,
-  init
+  init,
+  getId
 };

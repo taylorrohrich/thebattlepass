@@ -1,31 +1,51 @@
+import apiRequest from "./../api";
 const getDefaultObject = (keys, entry) => {
   return keys.reduce((acc, key) => {
     const { name, defaultValue } = key;
-    return { ...acc, [name]: entry ? entry[name] : defaultValue };
+    return {
+      ...acc,
+      [name]: entry && entry[name] != null ? entry[name] : defaultValue
+    };
   }, {});
 };
-const getDefaultState = (tab, entry) => {
+const getDefaultState = (tab, entry, params) => {
   switch (tab) {
     case "events":
-      return getDefaultObject([{ name: "id" }, { name: "title" }], entry);
+      return getDefaultObject(
+        [
+          { name: "eventId" },
+          { name: "style", defaultValue: "default" },
+          { name: "title" },
+          { name: "challenges", defaultValue: [] },
+          { name: "seasonNumber", defaultValue: params.seasonNumber }
+        ],
+        entry
+      );
     case "seasons":
-      return getDefaultObject([{ name: "id" }, { name: "number" }], entry);
+      return getDefaultObject(
+        [{ name: "seasonNumber" }, { name: "active" }],
+        entry
+      );
     case "resources":
       return getDefaultObject(
         [
-          { name: "id" },
+          { name: "type" },
+          { name: "resourceId" },
           { name: "width" },
           { name: "height" },
           { name: "url" },
-          { name: "title" }
+          { name: "title" },
+          { name: "url" }
         ],
         entry
       );
     case "challenges":
       return getDefaultObject(
         [
-          { name: "id" },
           { name: "type", defaultValue: 0 },
+          { name: "eventId", defaultValue: params.eventId },
+          { name: "seasonNumber", defaultValue: params.seasonNumber },
+          { name: "i" },
           {
             name: "stages",
             defaultValue: [
@@ -33,7 +53,8 @@ const getDefaultState = (tab, entry) => {
                 coordinates: [],
                 rewardCount: null,
                 rewardType: null,
-                title: null
+                title: null,
+                count: null
               }
             ]
           }
@@ -47,7 +68,7 @@ const getDefaultState = (tab, entry) => {
 };
 const getEntryName = (tab, entry) => {
   if (entry) {
-    return `${tab}-${entry.id}`;
+    return `${tab}-${entry[getId(tab)]}`;
   }
   return `${tab}-new`;
 };
@@ -60,9 +81,9 @@ const getNewStages = (stages, i, obj) => {
   });
 };
 
-const getEventsComponents = (entry, entryName, callback) => {
+const getEventsComponents = (entry, entryName, callback, submitCallback) => {
   const isNew = entryName === "events-new";
-  const { title } = entry;
+  const { title, style } = entry;
   return [
     [
       {
@@ -72,42 +93,97 @@ const getEventsComponents = (entry, entryName, callback) => {
         callback: e => {
           callback(entryName, { title: e });
         }
-      }
-    ],
-    [
+      },
       {
-        type: "button",
-        title: isNew ? "Add Event" : "Update Event"
-      }
-    ]
-  ];
-};
-
-const getSeasonsComponents = (entry, entryName, callback) => {
-  const isNew = entryName === "seasons-new";
-  const { number } = entry;
-  return [
-    [
-      {
-        title: "Season Name",
-        type: "input",
-        value: number,
+        type: "radio",
+        title: "Style",
+        selected: style,
+        values: [{ value: "default", title: "Default" }],
         callback: e => {
-          callback(entryName, { number: e });
+          callback(entryName, { ...entry, style: e });
         }
       }
     ],
     [
       {
         type: "button",
-        title: isNew ? "Add Season" : "Update Season"
+        title: isNew ? "Add Event" : "Update Event",
+        callback: () => {
+          const name = `postEvents${isNew ? "Create" : "Update"}`;
+          apiRequest({ name, body: entry }).then(() =>
+            submitCallback({ events: true })
+          );
+        }
+      },
+      {
+        type: "button",
+        hidden: isNew,
+        title: "Delete Event",
+        callback: () => {
+          const name = "postEventsDelete",
+            { eventId, seasonNumber } = entry;
+          apiRequest({ name, body: { seasonNumber, eventId } }).then(() =>
+            submitCallback({ events: true })
+          );
+        }
       }
     ]
   ];
 };
 
-const getResourcesComponents = (entry, entryName, callback) => {
-  const { width, height, title, url } = entry;
+const getSeasonsComponents = (entry, entryName, callback, submitCallback) => {
+  const isNew = entryName === "seasons-new";
+  const { seasonNumber, active } = entry;
+  return [
+    [
+      {
+        title: "Season Name",
+        type: "input",
+        value: seasonNumber && String(seasonNumber),
+        callback: e => {
+          callback(entryName, { seasonNumber: Number(e) });
+        }
+      },
+      {
+        type: "button",
+        hidden: isNew,
+        title: "Toggle Active",
+        toggle: !active,
+        value: active,
+        callback: () => {
+          callback(entryName, { active: !active });
+        }
+      }
+    ],
+    [
+      {
+        type: "button",
+        title: isNew ? "Add Season" : "Update Season",
+        callback: () => {
+          const name = `postSeasons${isNew ? "Create" : "Update"}`;
+          apiRequest({ name, body: entry }).then(() =>
+            submitCallback({ seasons: true })
+          );
+        }
+      },
+      {
+        type: "button",
+        hidden: isNew,
+        title: "Delete Season",
+        callback: () => {
+          const name = "postSeasonsDelete",
+            { seasonNumber } = entry;
+          apiRequest({ name, body: { seasonNumber: seasonNumber } }).then(() =>
+            submitCallback({ seasons: true })
+          );
+        }
+      }
+    ]
+  ];
+};
+
+const getResourcesComponents = (entry, entryName, callback, submitCallback) => {
+  const { width, height, title, url, type } = entry;
   const isNew = entryName === "resources-new";
   return [
     [
@@ -118,49 +194,122 @@ const getResourcesComponents = (entry, entryName, callback) => {
         callback: e => {
           callback(entryName, { title: e });
         }
+      },
+      {
+        type: "radio",
+        title: "Type",
+        selected: type,
+        values: [{ value: "icon", title: "icon" }],
+        callback: e => {
+          callback(entryName, { ...entry, type: e });
+        }
       }
     ],
     [
       {
         title: "Width",
         type: "input",
-        value: width,
+        value: width && String(width),
         callback: e => {
-          callback(entryName, { width: e });
+          callback(entryName, { width: Number(e) });
         }
       },
       {
         title: "Height",
         type: "input",
-        value: height,
+        value: height && String(height),
         callback: e => {
-          callback(entryName, { height: e });
+          callback(entryName, { height: Number(e) });
         }
       }
     ],
-    [{ type: "dropzone", title: "Add new Resource", image: url }],
+    [
+      {
+        type: "dropzone",
+        title: "Add new Resource",
+        image: url,
+        callback: e => {
+          const file = e[0];
+          const url = URL.createObjectURL(file);
+          callback(entryName, { file, url });
+        }
+      }
+    ],
     [
       {
         type: "button",
-        title: isNew ? "Add Resource" : "Update Resource"
+        title: isNew ? "Add Resource" : "Update Resource",
+        callback: e => {
+          const { width, height, title, type, file, resourceId } = entry;
+          if (isNew) {
+            if (file) {
+              getBase64(file).then(image => {
+                apiRequest({
+                  name: `postResourcesCreate`,
+                  body: { width, height, title, type, image }
+                }).then(() => submitCallback({ resources: true }));
+              });
+            }
+          } else {
+            apiRequest({
+              name: `postResourcesUpdate`,
+              body: { width, height, title, type, resourceId }
+            }).then(() => submitCallback({ resources: true }));
+          }
+        }
+      },
+      {
+        type: "button",
+        hidden: isNew,
+        title: "Delete Resource",
+        callback: e => {
+          const { title, resourceId, type } = entry;
+          apiRequest({
+            name: "postResourcesDelete",
+            body: { title, resourceId, type }
+          }).then(() => submitCallback({ resources: true }));
+        }
       }
     ]
   ];
 };
 
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      let encoded = reader.result.replace(/^data:(.*;base64,)?/, "");
+      if (encoded.length % 4 > 0) {
+        encoded += "=".repeat(4 - (encoded.length % 4));
+      }
+      resolve(encoded);
+    };
+    reader.onerror = error => reject(error);
+  });
+}
 const getChallengesComponents = (
   entry,
   entryName,
   callback,
   resources,
-  coordinate
+  coordinate,
+  challenges,
+  submitCallback
 ) => {
   const { stages, type } = entry;
   const isNew = entryName === "challenges-new";
   return stages
     .reduce(
       (acc, stage, index) => {
-        const { title, rewardCount, rewardType, iconId, coordinates } = stage;
+        const {
+          title,
+          rewardCount,
+          rewardType,
+          iconId,
+          coordinates,
+          count
+        } = stage;
         const coordinateComponents = coordinates.reduce((acc, c, cIndex) => {
           return acc.concat([
             [
@@ -270,11 +419,22 @@ const getChallengesComponents = (
               title: "Icon",
               type: "select",
               values: resources.map(resource => {
-                return { title: resource.title, value: resource.id };
+                return { title: resource.title, value: resource.resourceId };
               }),
               selected: iconId,
               callback: e => {
                 const newStages = getNewStages(stages, index, { iconId: e });
+                callback(entryName, { ...entry, stages: newStages });
+              }
+            },
+            {
+              title: "Count",
+              type: "input",
+              value: count && String(count),
+              callback: e => {
+                const newStages = getNewStages(stages, index, {
+                  count: Number(e)
+                });
                 callback(entryName, { ...entry, stages: newStages });
               }
             }
@@ -298,10 +458,10 @@ const getChallengesComponents = (
             {
               title: "Amount",
               type: "input",
-              value: rewardCount,
+              value: rewardCount && String(rewardCount),
               callback: e => {
                 const newStages = getNewStages(stages, index, {
-                  rewardCount: e
+                  rewardCount: Number(e)
                 });
                 callback(entryName, { ...entry, stages: newStages });
               }
@@ -378,7 +538,45 @@ const getChallengesComponents = (
       [
         {
           type: "button",
-          title: isNew ? "Add Challenge" : "Update Challenge"
+          title: isNew ? "Add Challenge" : "Update Challenge",
+          callback: () => {
+            const { eventId, seasonNumber, type, stages, i } = entry,
+              newChallenge = { type, stages },
+              newChallenges = isNew
+                ? challenges.concat(newChallenge)
+                : challenges.reduce((acc, challenge, index) => {
+                    if (index === i) {
+                      return acc.concat(newChallenge);
+                    } else {
+                      return acc.concat(challenge);
+                    }
+                  }, []);
+            const name = `postEventsUpdate`;
+            apiRequest({
+              name,
+              body: { challenges: newChallenges, eventId, seasonNumber }
+            }).then(() => submitCallback({ events: true }));
+          }
+        },
+        {
+          type: "button",
+          title: "Delete",
+          hidden: isNew,
+          callback: () => {
+            const { eventId, seasonNumber, i } = entry,
+              newChallenges = challenges.reduce((acc, challenge, index) => {
+                if (index !== i) {
+                  return acc.concat(challenge);
+                } else {
+                  return acc;
+                }
+              }, []);
+            const name = `postEventsUpdate`;
+            apiRequest({
+              name,
+              body: { challenges: newChallenges, eventId, seasonNumber }
+            }).then(() => submitCallback({ events: true }));
+          }
         }
       ]
     ]);
@@ -389,25 +587,44 @@ const getComponents = ({
   entryName,
   callback,
   resources,
-  coordinate
+  coordinate,
+  submitCallback,
+  challenges
 }) => {
   switch (tab) {
     case "seasons":
-      return getSeasonsComponents(entry, entryName, callback);
+      return getSeasonsComponents(entry, entryName, callback, submitCallback);
     case "events":
-      return getEventsComponents(entry, entryName, callback);
+      return getEventsComponents(entry, entryName, callback, submitCallback);
     case "resources":
-      return getResourcesComponents(entry, entryName, callback);
+      return getResourcesComponents(entry, entryName, callback, submitCallback);
     case "challenges":
       return getChallengesComponents(
         entry,
         entryName,
         callback,
         resources,
-        coordinate
+        coordinate,
+        challenges,
+        submitCallback
       );
     default:
       return null;
   }
 };
-export { getEntryName, getDefaultState, getNewStages, getComponents };
+
+const getId = tab => {
+  switch (tab) {
+    case "seasons":
+      return "seasonNumber";
+    case "events":
+      return "eventId";
+    case "resources":
+      return "resourceId";
+    case "challenges":
+      return "i";
+    default:
+      return null;
+  }
+};
+export { getEntryName, getDefaultState, getNewStages, getComponents, getId };

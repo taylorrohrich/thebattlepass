@@ -7,13 +7,13 @@ const {
   updateMapProperties,
   switchIsUpdated,
   updateCoordinate,
-  updateResources
+  updateMapResources
 } = map;
 const actionCreators = {
   updateMapProperties,
   switchIsUpdated,
   updateCoordinate,
-  updateResources
+  updateMapResources
 };
 const mapStateToProps = state => {
   const { selected } = state.season,

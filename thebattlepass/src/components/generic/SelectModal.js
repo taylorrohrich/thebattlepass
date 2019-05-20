@@ -55,7 +55,10 @@ class SelectModal extends React.Component {
         </div>
 
         <Dialog open={open} disableBackdropClick disableEscapeKeyDown>
-          <DialogContent className="selectModal flex-one flex-column">
+          <DialogContent
+            style={{ width: 500, height: 500 }}
+            className="flex-one flex-column"
+          >
             {mapSelects(selects)}
           </DialogContent>
         </Dialog>

@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         coordinate
       };
     }
-    case "UPDATE_RESOURCES": {
+    case "UPDATE_MAP_RESOURCES": {
       const { resources } = action;
       return {
         ...state,

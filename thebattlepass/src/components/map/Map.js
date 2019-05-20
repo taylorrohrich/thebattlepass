@@ -14,7 +14,7 @@ class Map extends Component {
       map,
       moderator,
       updateCoordinate,
-      updateResources,
+      updateMapResources,
       resources,
       seasonNumber
     } = this.props;
@@ -29,12 +29,23 @@ class Map extends Component {
       );
     }
     if (!resources) {
-      apiRequest({ name: "getResources" }).then(response => {
-        const filteredResources = response.data.reduce((acc, resource) => {
-          return { ...acc, [resource.id]: resource };
-        }, {});
-        updateResources(filteredResources);
-      });
+      apiRequest({ name: "getResources", parameters: { type: "icon" } }).then(
+        response => {
+          const filteredResources = response.data.reduce((acc, resource) => {
+            const { Height, Width, Title, Url, ResourceId } = resource;
+            return {
+              ...acc,
+              [ResourceId]: {
+                height: Height,
+                width: Width,
+                title: Title,
+                url: Url
+              }
+            };
+          }, {});
+          updateMapResources(filteredResources);
+        }
+      );
     }
   }
 

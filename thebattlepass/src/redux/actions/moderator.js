@@ -17,10 +17,10 @@ export default {
       seasons
     };
   },
-  updateEvent: event => {
+  updateEvent: index => {
     return {
       type: "UPDATE_EVENT",
-      event
+      index
     };
   },
   updateResources: resources => {
@@ -46,6 +46,12 @@ export default {
       type: "UPDATE_ENTRY",
       name,
       values
+    };
+  },
+  updateIsUpdated: updates => {
+    return {
+      type: "UPDATE_IS_UPDATED",
+      updates
     };
   }
 };

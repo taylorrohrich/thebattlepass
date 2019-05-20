@@ -5,6 +5,8 @@ import apiRequest from "../../api";
 import Season from "./Season";
 import { season, map } from "../../redux/actions";
 
+import "./season.scss";
+
 const { setSeason, setSeasonNumber } = season,
   { switchIsUpdated } = map,
   actionCreators = { setSeason, switchIsUpdated, setSeasonNumber };
@@ -20,14 +22,14 @@ const SeasonContainer = props => {
   if (seasonNumber && !Number(seasonNumber)) {
     props.history.push(`/error`);
   } else if (!seasonNumber) {
-    apiRequest({ name: "getSeasonActive" }).then(response => {
-      const number = response.data && response.data.number;
+    apiRequest({ name: "getSeasonsActive" }).then(response => {
+      const number = response.data && response.data.SeasonNumber;
       props.history.push(number ? `/season/${number}` : `/error`);
     });
   } else {
     return <Season seasonNumber={Number(seasonNumber)} {...props} />;
   }
-  return <div />;
+  return <div className="flex-one" />;
 };
 export default connect(
   mapStateToProps,

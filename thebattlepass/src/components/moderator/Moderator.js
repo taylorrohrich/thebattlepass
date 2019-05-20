@@ -17,9 +17,9 @@ const getTab = (tab, event, events, updateEvent) => {
             title: "Events",
             callback: updateEvent,
             selected: event && event.id,
-            values: events.map(event => {
+            values: events.map((event, index) => {
               return {
-                value: event,
+                value: index,
                 title: event.title
               };
             })
@@ -49,25 +49,85 @@ class Moderator extends React.Component {
   componentDidMount() {
     const { seasons, updateSeasons, updateResources, resources } = this.props;
     if (!seasons) {
-      apiRequest({ name: "getSeasonList" }).then(response => {
-        updateSeasons(response.data);
+      apiRequest({ name: "getSeasonsList" }).then(response => {
+        const parsedSeasons = response.data.map(season => {
+          const { SeasonNumber, Active } = season;
+          return { seasonNumber: SeasonNumber, active: Active };
+        });
+        updateSeasons(parsedSeasons);
       });
     }
     if (!resources) {
-      apiRequest({ name: "getResources" }).then(response => {
-        updateResources(response.data);
-      });
+      apiRequest({ name: "getResources", parameters: { type: "icon" } }).then(
+        response => {
+          const parsedResources = response.data.map(resource => {
+            const { Height, ResourceId, Title, Type, Url, Width } = resource;
+            return {
+              height: Height,
+              resourceId: ResourceId,
+              title: Title,
+              type: Type,
+              url: Url,
+              width: Width
+            };
+          });
+          updateResources(parsedResources);
+        }
+      );
     }
   }
   componentDidUpdate() {
-    const { seasonNumber, events, updateEvents } = this.props;
-    if (seasonNumber && !events) {
+    const {
+      seasonNumber,
+      updateEvents,
+      updateSeasons,
+      updateResources,
+      isUpdated
+    } = this.props;
+    if (isUpdated.events) {
       apiRequest({
-        name: "getSeasonEvents",
-        paramaters: { seasonNumber }
+        name: "getEvents",
+        parameters: { seasonNumber }
       }).then(response => {
-        updateEvents(response.data);
+        const parsedEvents = response.data.map(season => {
+          const { Challenges, EventId, SeasonNumber, Style, Title } = season;
+          return {
+            challenges: Challenges,
+            seasonNumber: SeasonNumber,
+            eventId: EventId,
+            style: Style,
+            title: Title
+          };
+        });
+        updateEvents(parsedEvents);
       });
+    }
+    if (isUpdated.seasons) {
+      apiRequest({ name: "getSeasonsList" }).then(response => {
+        const parsedSeasons = response.data.map(season => {
+          const { SeasonNumber, Active } = season;
+          return { seasonNumber: SeasonNumber, active: Active };
+        });
+        updateSeasons(parsedSeasons);
+      });
+    }
+    if (isUpdated.resources) {
+      apiRequest({ name: "getResources", parameters: { type: "icon" } }).then(
+        response => {
+          const parsedResources = response.data.map(resource => {
+            const { Height, ResourceId, Title, Type, Url, Width } = resource;
+            return {
+              height: Height,
+              resourceId: ResourceId,
+              title: Title,
+              type: Type,
+              url: Url,
+              width: Width
+            };
+          });
+          updateResources(parsedResources);
+        }
+      );
     }
   }
   render() {
@@ -94,9 +154,10 @@ class Moderator extends React.Component {
               callback: updateSeasonNumber,
               selected: seasonNumber,
               values: seasons.map(season => {
+                const { seasonNumber } = season;
                 return {
-                  value: season.number,
-                  title: `Season ${season.number}`
+                  value: seasonNumber,
+                  title: `Season ${seasonNumber}`
                 };
               })
             }

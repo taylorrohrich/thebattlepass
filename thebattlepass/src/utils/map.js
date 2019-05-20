@@ -1,5 +1,6 @@
 import L from "leaflet";
 import images from "./../images";
+import { season } from "../redux/actions";
 const updateMapWidth = width => {
   if (width >= 2000) return 1200;
   if (width >= 1600) return 1000;
@@ -25,11 +26,13 @@ ${title ? `<div style='flex:1' ><i>${title}</i></div>` : ""}
 };
 
 const getIcon = (iconWidth, icon) => {
-  const { width, height, url } = icon;
-  return L.icon({
-    iconUrl: url,
-    iconSize: [iconWidth * width, iconWidth * height]
-  });
+  if (icon) {
+    const { width, height, url } = icon;
+    return L.icon({
+      iconUrl: url,
+      iconSize: [iconWidth * width, iconWidth * height]
+    });
+  }
 };
 
 const generateMarkers = (markers, selected, mapDimension, resources) => {

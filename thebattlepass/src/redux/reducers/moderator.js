@@ -1,11 +1,18 @@
 const initialState = {
   tab: "seasons",
+  resources: null,
   seasonNumber: null,
   challenges: null,
   event: null,
   events: null,
+  eventsIndex: null,
   seasons: null,
-  modalVisible: false
+  modalVisible: false,
+  isUpdated: {
+    events: false,
+    resources: false,
+    seasons: false
+  }
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -17,39 +24,66 @@ export default (state = initialState, action) => {
       };
     }
     case "UPDATE_SEASON_NUMBER": {
-      const { seasonNumber } = action;
+      const { seasonNumber } = action,
+        { isUpdated } = state;
       return {
         ...state,
-        seasonNumber
+        seasonNumber,
+        isUpdated: { ...isUpdated, events: true }
       };
     }
     case "UPDATE_SEASONS": {
-      const { seasons } = action;
+      const { seasons } = action,
+        { isUpdated } = state;
       return {
         ...state,
-        seasons
+        seasons,
+        isUpdated: { ...isUpdated, seasons: false }
       };
     }
     case "UPDATE_EVENT": {
-      const { event } = action;
+      const { index } = action,
+        { events } = state,
+        event = events[index],
+        challenges = event.challenges.map((c, i) => {
+          return { ...c, i };
+        });
       return {
         ...state,
         event,
-        challenges: event.challenges
+        challenges,
+        eventsIndex: index
       };
     }
     case "UPDATE_EVENTS": {
-      const { events } = action;
-      return {
-        ...state,
-        events
-      };
+      const { events } = action,
+        { isUpdated, eventsIndex } = state;
+      if (eventsIndex !== null) {
+        const event = events[eventsIndex],
+          challenges = event.challenges.map((c, i) => {
+            return { ...c, i };
+          });
+        return {
+          ...state,
+          events,
+          challenges,
+          isUpdated: { ...isUpdated, events: false }
+        };
+      } else {
+        return {
+          ...state,
+          events,
+          isUpdated: { ...isUpdated, events: false }
+        };
+      }
     }
     case "UPDATE_RESOURCES": {
-      const { resources } = action;
+      const { resources } = action,
+        { isUpdated } = state;
       return {
         ...state,
-        resources
+        resources,
+        isUpdated: { ...isUpdated, resources: false }
       };
     }
     case "ADD_ENTRIES": {
@@ -66,6 +100,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         [name]: newEntry
+      };
+    }
+    case "UPDATE_IS_UPDATED": {
+      const { updates } = action,
+        { isUpdated } = state;
+      return {
+        ...state,
+        isUpdated: { ...isUpdated, ...updates }
       };
     }
     default:

@@ -1,0 +1,20 @@
+
+# Settings in the [build] context are global and are applied to all contexts unless otherwise overridden by more specific contexts.  
+
+[build]
+  # This is the directory to change to before starting a build.
+  base    = "website/"
+  publish = "website/build"
+
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
+  status = 200
+  force = true
+  signed ="REACT_APP_API_SECRET"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

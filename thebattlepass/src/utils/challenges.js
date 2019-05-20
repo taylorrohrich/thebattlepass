@@ -30,17 +30,18 @@ const mapChallengeCollections = (
     (key, index) => {
       const challengeSet = challenges[key];
       const header = getHeader(key);
-      return (
-        <ChallengeCollection
-          key={`challengeCollection-${index}`}
-          style={key === "metaChallenges" && style}
-          header={header}
-          challenges={challengeSet}
-          type={key}
-          selected={selected}
-          switchSelected={switchSelected}
-        />
-      );
+      if (challengeSet.length)
+        return (
+          <ChallengeCollection
+            key={`challengeCollection-${index}`}
+            style={key === "metaChallenges" && style}
+            header={header}
+            challenges={challengeSet}
+            type={key}
+            selected={selected}
+            switchSelected={switchSelected}
+          />
+        );
     },
     []
   );

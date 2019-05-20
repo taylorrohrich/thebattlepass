@@ -14,9 +14,9 @@ export default {
       isUpdated
     };
   },
-  updateResources: resources => {
+  updateMapResources: resources => {
     return {
-      type: "UPDATE_RESOURCES",
+      type: "UPDATE_MAP_RESOURCES",
       resources
     };
   },

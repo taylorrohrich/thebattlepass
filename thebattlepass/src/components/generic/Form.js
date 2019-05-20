@@ -77,10 +77,10 @@ const RadioComponent = props => {
 };
 
 const ButtonComponent = props => {
-  const { title, callback } = props;
+  const { title, callback, toggle } = props;
   return (
     <div className="formComponent flex-column ">
-      <Button color="primary" onClick={callback}>
+      <Button color={toggle ? "secondary" : "primary"} onClick={callback}>
         {title}
       </Button>
     </div>
@@ -91,7 +91,7 @@ const DropzoneComponent = props => {
   const { title, callback, image } = props;
   return (
     <div className="formComponent  flex-column flex-one">
-      <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+      <Dropzone onDrop={e => callback(e)}>
         {({ getRootProps, getInputProps }) => (
           <section>
             <div
@@ -137,12 +137,20 @@ const getComponent = type => {
 };
 const mapComponents = components => {
   return components.map((row, i) => {
-    const rowComponents = row.map((component, j) => {
-      const Component = getComponent(component.type);
-      return (
-        <Component key={`col-${j}`} className="formComponent" {...component} />
-      );
-    });
+    const rowComponents = row.reduce((acc, component, j) => {
+      const { type, hidden } = component;
+      const Component = getComponent(type);
+      if (!hidden) {
+        return acc.concat(
+          <Component
+            key={`col-${j}`}
+            className="formComponent"
+            {...component}
+          />
+        );
+      }
+      return acc;
+    }, []);
     return (
       <div key={`row-${i}`} className="flex-row">
         {rowComponents}

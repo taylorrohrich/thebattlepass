@@ -3,10 +3,11 @@ import { moderator } from "../../../redux/actions";
 
 import Tab from "./Tab";
 
-const { addEntries, updateEntry } = moderator;
+const { addEntries, updateEntry, updateIsUpdated } = moderator;
 const actionCreators = {
   addEntries,
-  updateEntry
+  updateEntry,
+  updateIsUpdated
 };
 const mapStateToProps = state => {
   const { moderator, map } = state,

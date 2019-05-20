@@ -1,4 +1,4 @@
-const types = ["metaChallenges", "bpChallenges", "freeChallenges"];
+const types = ["metaChallenges", "freeChallenges", "bpChallenges"];
 const flattenChallenges = (challenges, keyOne) => {
   return challenges.reduce(
     (acc, challenge) => {
@@ -27,16 +27,17 @@ const flattenChallenges = (challenges, keyOne) => {
     }
   );
 };
-const getSelectedEvents = season => {
-  const { events, number } = season;
+const getSelectedEvents = (events, seasonNumber) => {
   const flattenedEvents = events.map((event, index) => {
-    const challenges = event.challenges,
-      key = `${number}-${index}`,
+    const challenges = event.Challenges,
+      style = event.Style,
+      title = event.Title,
+      key = `${seasonNumber}-${index}`,
       newChallenges = flattenChallenges(challenges, key);
-    return { ...event, challenges: newChallenges };
+    return { style, title, seasonNumber, challenges: newChallenges };
   });
   const selected = flattenedEvents.reduce((acc1, event, index1) => {
-    const keyOne = `${number}-${index1}`,
+    const keyOne = `${seasonNumber}-${index1}`,
       challenges = event.challenges,
       eventSet = Object.keys(challenges).reduce((acc2, key) => {
         const challengeSet = challenges[key].reduce(
@@ -55,6 +56,6 @@ const getSelectedEvents = season => {
       }, {});
     return { ...acc1, [keyOne]: eventSet };
   }, {});
-  return { events: flattenedEvents, selected, seasonNumber: number };
+  return { events: flattenedEvents, selected, seasonNumber };
 };
 export { getSelectedEvents };

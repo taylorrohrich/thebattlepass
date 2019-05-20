@@ -9,7 +9,8 @@ const {
   updateSeasons,
   updateEvents,
   updateResources,
-  updateEvent
+  updateEvent,
+  updateIsUpdated
 } = moderator;
 const actionCreators = {
   updateTab,
@@ -17,12 +18,21 @@ const actionCreators = {
   updateSeasons,
   updateEvents,
   updateResources,
-  updateEvent
+  updateEvent,
+  updateIsUpdated
 };
 const mapStateToProps = state => {
   const { moderator } = state,
-    { tab, seasons, seasonNumber, events, event } = moderator;
-  return { tab, seasons, seasonNumber, events, event };
+    {
+      tab,
+      seasons,
+      seasonNumber,
+      events,
+      event,
+      isUpdated,
+      resources
+    } = moderator;
+  return { tab, seasons, seasonNumber, events, event, isUpdated, resources };
 };
 export default connect(
   mapStateToProps,

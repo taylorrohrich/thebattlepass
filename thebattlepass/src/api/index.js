@@ -1,22 +1,39 @@
-const apiRequest = async ({ name, parameters }) => {
-  if (name === "getSeasonActive") {
-    return { data: { number: 9 } };
-  }
-  if (name === "getSeason") {
-    return { data: parameters.number === 9 ? season : null };
-  }
-  if (name === "getSeasonList") {
-    return { data: seasonList };
-  }
-  if (name === "getSeasonEvents") {
-    return { data: season.events };
-  }
-  if (name === "getResources") {
-    return { data: resources };
+import axios from "axios";
+import { forEach, some } from "lodash";
+
+const apiRequest = async ({ name, body, parameters, formData }) => {
+  if (parameters && some(parameters, parameter => parameter === null)) {
+    alert("not all fields filled out");
+  } else {
+    const method = routes[name][1],
+      websiteUrl =
+        process.env.NODE_ENV === "development"
+          ? "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
+          : "/api",
+      url = websiteUrl + routes[name][0],
+      data = formData ? formDataBody({ name, formData }) : body,
+      config = formData
+        ? { headers: { "Content-Type": "multipart/form-data" } }
+        : null,
+      fetchData = {
+        url,
+        method,
+        data,
+        params: parameters,
+        config
+      };
+    return axios(fetchData).then(response => {
+      return response;
+    });
   }
 };
 
 export default apiRequest;
+const formDataBody = ({ name, formData }) => {
+  let bodyFormData = new FormData();
+  forEach(formData, (value, key) => bodyFormData.set(key, value));
+  return bodyFormData;
+};
 
 const resources = [
   {
@@ -58,155 +75,18 @@ const seasonList = [
     id: 3
   }
 ];
-// const routes = {
-//   getSeasonActive: ["/Season/Active", "GET"],
-//   getSeason: ["/Season/Number", "GET"],
-//   getSeasonList: ["/Season/List", "GET"],
-//   postSeasonCreate: ["/Season/Create", "POST"],
-//   postSeasonUpdate: ["/Season/Update", "POST"],
-//   postSeasonDelete: ["/Season/Delete", "POST"],
-//   postWeekCreate: ["/Season/Week/Create", "POST"],
-//   postWeekDelete: ["/Season/Week/Delete", "POST"],
-//   postChallengeCreate: ["/Challenge/Create", "POST"],
-//   postChallengeUpdate: ["/Challenge/Update", "POST"],
-//   getImageType: ["/Image/Type", "GET"],
-//   postImageCreate: ["/Image/Create", "POST"],
-//   postImageUpdate: ["/Image/Update", "POST"],
-//   postImageDelete: ["/Image/Delete", "POST"],
-//   postLocationCreate: ["/Challenge/Location/Create", "POST"],
-//   postLocationUpdate: ["/Challenge/Location/Update", "POST"],
-//   postLocationDelete: ["/Challenge/Location/Delete", "POST"]
-// };
-
-const season = {
-  number: 9,
-  id: 123,
-  events: [
-    {
-      title: "Week 1",
-      style: "default",
-      id: 1,
-      challenges: [
-        {
-          id: 1,
-          type: 0,
-          stages: [
-            {
-              title:
-                "Complete any 4 of the challenges below to earn the reward",
-              rewardType: "xp",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            }
-          ]
-        },
-        {
-          id: 2,
-          type: 1,
-          stages: [
-            {
-              title: "Challenge",
-              count: 3,
-              rewardType: "battlestar",
-              rewardCount: 10,
-              coordinates: [
-                {
-                  x: 0.3,
-                  y: 0.2,
-                  title: "test",
-                  url:
-                    "https://images.pexels.com/photos/259803/pexels-photo-259803.jpeg?cs=srgb&dl=adorable-animal-animal-photography-259803.jpg&fm=jpg"
-                }
-              ],
-              iconId: 1
-            }
-          ]
-        },
-        {
-          id: 3,
-          type: 2,
-          stages: [
-            ({
-              title: "Challenge",
-
-              count: 3,
-              rewardType: "battlestar",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            },
-            {
-              title:
-                "Challenge a lot of things need to be done oh man oh boy will this fit inside oh boy oh gee of man oh my o man ",
-              count: 3,
-              rewardType: "battlestar",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            })
-          ]
-        }
-      ]
-    },
-    {
-      title: "Week 2",
-      style: "default",
-      id: 2,
-      challenges: [
-        {
-          id: 5,
-          type: 0,
-          stages: [
-            {
-              title:
-                "Complete any 4 of the challenges below to earn the reward",
-              rewardType: "xp",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            }
-          ]
-        },
-        {
-          id: 6,
-          type: 1,
-          stages: [
-            {
-              title: "Challenge",
-              count: 3,
-              rewardType: "battlestar",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            }
-          ]
-        },
-        {
-          id: 7,
-          type: 2,
-          stages: [
-            {
-              title: "Challenge",
-
-              count: 3,
-              rewardType: "battlestar",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            },
-            {
-              title:
-                "Challenge a lot of things need to be done oh man oh boy will this fit inside oh boy oh gee of man oh my o man ",
-              count: 3,
-              rewardType: "battlestar",
-              rewardCount: 10,
-              coordinates: [{ x: 0.3, y: 0.2, title: "test", url: null }],
-              iconId: 1
-            }
-          ]
-        }
-      ]
-    }
-  ]
+const routes = {
+  getEvents: ["/events", "GET"],
+  getResources: ["/resources", "GET"],
+  getSeasonsActive: ["/seasons/active", "GET"],
+  getSeasonsList: ["/seasons/list", "GET"],
+  postEventsCreate: ["/events/create", "POST"],
+  postEventsDelete: ["/events/delete", "POST"],
+  postEventsUpdate: ["/events/update", "POST"],
+  postResourcesCreate: ["/resources/create", "POST"],
+  postResourcesDelete: ["/resources/delete", "POST"],
+  postResourcesUpdate: ["/resources/update", "POST"],
+  postSeasonsCreate: ["/seasons/create", "POST"],
+  postSeasonsDelete: ["/seasons/delete", "POST"],
+  postSeasonsUpdate: ["/seasons/update", "POST"]
 };

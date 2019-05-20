@@ -47,12 +47,12 @@ class Season extends React.Component {
     const { events, seasonNumber, setSeason, switchIsUpdated } = this.props;
     if (!events) {
       apiRequest({
-        name: "getSeason",
-        parameters: { number: seasonNumber }
+        name: "getEvents",
+        parameters: { seasonNumber }
       }).then(response => {
-        const season = response.data;
-        if (season) {
-          setSeason(getSelectedEvents(season, seasonNumber));
+        const events = response.data;
+        if (events.length) {
+          setSeason(getSelectedEvents(events, seasonNumber));
           switchIsUpdated(true);
         } else {
           this.props.history.push("/error");
@@ -63,7 +63,7 @@ class Season extends React.Component {
   render() {
     const { seasonNumber, events, width } = this.props;
     if (!events) {
-      return <div />;
+      return <div className="flex-one" />;
     }
     return (
       <div className="flex-column flex-one">
