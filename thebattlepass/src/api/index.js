@@ -7,9 +7,10 @@ const apiRequest = async ({ name, body, parameters, formData }) => {
   } else {
     const method = routes[name][1],
       websiteUrl =
-        process.env.NODE_ENV === "development"
-          ? "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
-          : "/api",
+        "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod",
+      // process.env.NODE_ENV === "development"
+      //   ? "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
+      //   : "/api",
       url = websiteUrl + routes[name][0],
       data = formData ? formDataBody({ name, formData }) : body,
       config = formData
