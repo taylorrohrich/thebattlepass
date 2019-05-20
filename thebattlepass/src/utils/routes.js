@@ -6,8 +6,9 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
-      render={props =>
-        netlifyAuth.isAuthenticated ? (
+      render={props => {
+        const user = netlifyIdentity.currentUser();
+        return user ? (
           <Component {...props} />
         ) : (
           <Redirect
@@ -16,28 +17,24 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
               state: { from: props.location }
             }}
           />
-        )
-      }
+        );
+      }}
     />
   );
 };
 
 const netlifyAuth = {
-  isAuthenticated: false,
-  user: null,
   authenticate(callback) {
-    this.isAuthenticated = true;
     netlifyIdentity.open();
     netlifyIdentity.on("login", user => {
-      this.user = user;
       callback(user);
+      netlifyIdentity.close();
     });
   },
   signout(callback) {
     this.isAuthenticated = false;
     netlifyIdentity.logout();
     netlifyIdentity.on("logout", () => {
-      this.user = null;
       callback();
     });
   }
