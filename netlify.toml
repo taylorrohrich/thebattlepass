@@ -12,8 +12,8 @@
   to = "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod/:splat"
   status = 200
   force = true
+  signed ="REACT_APP_API_SECRET"
   
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
