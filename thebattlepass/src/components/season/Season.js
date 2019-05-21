@@ -60,7 +60,7 @@ class Season extends React.Component {
             this.props.history.push("/error");
           }
         })
-        .catch(err => this.props.history.push("/error"));
+        .catch(err => console.log(err));
     }
   }
   render() {

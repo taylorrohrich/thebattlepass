@@ -55,12 +55,14 @@ const Challenge = props => {
         </div>
       </div>
       <div className="flex-row justify-space-between">
-        <Image
-          dimension={50}
-          source={rewardType}
-          textColor="white"
-          text={rewardCount}
-        />
+        {rewardType && (
+          <Image
+            dimension={50}
+            source={rewardType}
+            textColor="white"
+            text={rewardCount}
+          />
+        )}
       </div>
     </div>
   );

@@ -5,6 +5,8 @@ import battlebadgeGrey from "./battlebadge_grey.png";
 import fnmap9 from "./fnmap9.jpg";
 import placeholder from "./placeholder.png";
 import github from "./github.png";
+import mystery from "./mystery.png";
+import screen from "./screen.png";
 import reddit from "./reddit.png";
 export default {
   battlestar,
@@ -14,5 +16,7 @@ export default {
   fnmap9,
   placeholder,
   github,
-  reddit
+  reddit,
+  mystery,
+  screen
 };

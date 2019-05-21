@@ -162,7 +162,10 @@ const getChallengesComponents = (
             selected: rewardType,
             values: [
               { value: "xp", title: "xp" },
-              { value: "battlestar", title: "battlestar" }
+              { value: "battlestar", title: "battlestar" },
+              { value: "mytery", title: "mystery" },
+              { value: "screen", title: "screen" },
+              { value: null, title: "none" }
             ],
             callback: e => {
               const newStages = getNewStages(stages, index, {

@@ -34,7 +34,11 @@ const SeasonContainer = props => {
   } else {
     return <WrappedSeason seasonNumber={Number(seasonNumber)} {...props} />;
   }
-  return <Loading />;
+  return (
+    <div className="flex-one justy-center align-center">
+      <Loading />
+    </div>
+  );
 };
 export default connect(
   mapStateToProps,

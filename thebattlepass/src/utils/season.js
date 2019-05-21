@@ -7,6 +7,7 @@ const flattenChallenges = (challenges, keyOne) => {
       const { stages, type } = challenge,
         numStages = stages.length,
         key = types[type];
+      console.log(challenge);
       const challengeSet = stages.map((stage, index) => {
         const keyTwo = `${key}-${index}`;
         const challengeItem = { ...stage, keyOne, keyTwo };
