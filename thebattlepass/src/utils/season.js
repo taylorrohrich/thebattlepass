@@ -1,4 +1,4 @@
-import { orderBy } from "lodash";
+import { orderBy, reverse } from "lodash";
 
 const types = ["metaChallenges", "freeChallenges", "bpChallenges"];
 const flattenChallenges = (challenges, keyOne) => {
@@ -7,7 +7,7 @@ const flattenChallenges = (challenges, keyOne) => {
       const { stages, type } = challenge,
         numStages = stages.length,
         key = types[type];
-      const challengeSet = stages.map((stage, index) => {
+      const challengeSet = reverse(stages).map((stage, index) => {
         const keyTwo = `${key}-${index}`;
         const challengeItem = { ...stage, keyOne, keyTwo };
         return numStages > 1
