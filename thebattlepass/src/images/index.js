@@ -19,5 +19,6 @@ export default {
   github,
   reddit,
   mystery,
-  screen
+  screen,
+  puzzle
 };
