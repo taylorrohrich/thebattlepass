@@ -50,15 +50,17 @@ class Season extends React.Component {
       apiRequest({
         name: "getEvents",
         parameters: { seasonNumber }
-      }).then(response => {
-        const events = response.data;
-        if (events.length) {
-          setSeason(getSelectedEvents(events, seasonNumber));
-          switchIsUpdated(true);
-        } else {
-          this.props.history.push("/error");
-        }
-      });
+      })
+        .then(response => {
+          const events = response.data;
+          if (events.length) {
+            setSeason(getSelectedEvents(events, seasonNumber));
+            switchIsUpdated(true);
+          } else {
+            this.props.history.push("/error");
+          }
+        })
+        .catch(err => this.props.history.push("/error"));
     }
   }
   render() {

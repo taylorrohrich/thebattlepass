@@ -10,7 +10,7 @@ import Season from "./../season";
 import Moderator from "./../moderator";
 import Error from "./Error";
 import Authentication from "./../authentication";
-import { wrapComponent, PrivateRoute } from "./../../utils";
+import { PrivateRoute } from "./../../utils";
 
 class Routes extends React.Component {
   componentDidMount() {
@@ -30,11 +30,7 @@ class Routes extends React.Component {
               render={() => <Redirect exact from="/" to="/season/" />}
             />
             <Route exact path="/season/:number?" component={Season} />
-            <PrivateRoute
-              exact
-              path="/moderator/"
-              component={wrapComponent(Moderator)}
-            />
+            <PrivateRoute exact path="/moderator/" component={Moderator} />
             <Route exact path="/login" component={Authentication} />
             <Route component={Error} />
           </Switch>

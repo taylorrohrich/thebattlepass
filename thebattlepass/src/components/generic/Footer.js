@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Image } from "./../generic";
+import Image from "./Image";
 
-import "./footer.scss";
+import "./generic.scss";
 
 const Footer = () => {
   return (
@@ -19,7 +19,7 @@ const Footer = () => {
           <Image
             source={"github"}
             dimension={30}
-            href="https://github.com/taylorrohrich"
+            href="https://github.com/taylorrohrich/thebattlepass"
           />
         </div>
         <div>

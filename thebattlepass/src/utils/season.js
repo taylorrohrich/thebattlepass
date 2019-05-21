@@ -1,4 +1,5 @@
 import { orderBy } from "lodash";
+
 const types = ["metaChallenges", "freeChallenges", "bpChallenges"];
 const flattenChallenges = (challenges, keyOne) => {
   return challenges.reduce(

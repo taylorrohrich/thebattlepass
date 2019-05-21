@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 
 import Moderator from "./Moderator";
 import { moderator } from "./../../redux/actions";
-
+import { wrapComponent } from "./../../utils";
 const {
   updateTab,
   updateSeasonNumber,
@@ -37,4 +37,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   actionCreators
-)(Moderator);
+)(wrapComponent(Moderator));

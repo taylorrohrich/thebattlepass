@@ -3,13 +3,7 @@ import { mapChallenges, mapChallengeCollections } from "./challenges";
 import { PrivateRoute, netlifyAuth } from "./routes";
 import { updateMapWidth, generateMarkers, mapRender, init } from "./map";
 import { wrapComponent } from "./general";
-import {
-  getDefaultState,
-  getEntryName,
-  getNewStages,
-  getComponents,
-  getId
-} from "./moderator";
+import { getDefaultState, getEntryName, getComponents } from "./moderator";
 export {
   getSelectedEvents,
   mapChallenges,
@@ -17,13 +11,11 @@ export {
   updateMapWidth,
   wrapComponent,
   getDefaultState,
-  getNewStages,
   getEntryName,
   getComponents,
   generateMarkers,
   mapRender,
   init,
-  getId,
   PrivateRoute,
   netlifyAuth
 };

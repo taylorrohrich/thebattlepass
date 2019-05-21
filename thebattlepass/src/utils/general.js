@@ -1,13 +1,10 @@
 import React from "react";
 
-import Navbar from "./../components/navbar";
-import Footer from "./../components/footer";
-import Header from "./../components/header";
-import Disqus from "./../components/disqus";
+import { Footer, Header, Navbar, Disqus } from "./../components/generic";
 
 import "./utils.scss";
 
-const wrapComponent = (Component, params) => {
+const wrapComponent = (Component, params = {}) => {
   return props => {
     const seasonNumber = props.match.params.number;
     return (
@@ -31,4 +28,19 @@ const wrapComponent = (Component, params) => {
     );
   };
 };
-export { wrapComponent };
+
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      let encoded = reader.result.replace(/^data:(.*;base64,)?/, "");
+      if (encoded.length % 4 > 0) {
+        encoded += "=".repeat(4 - (encoded.length % 4));
+      }
+      resolve(encoded);
+    };
+    reader.onerror = error => reject(error);
+  });
+}
+export { wrapComponent, getBase64 };

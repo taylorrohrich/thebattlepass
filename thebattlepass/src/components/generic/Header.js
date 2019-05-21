@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { Image } from "./../generic";
+import Image from "./Image";
 
-import "./header.scss";
+import "./generic.scss";
 
 const Header = props => {
   const { width } = props;
@@ -13,7 +13,7 @@ const Header = props => {
         <Image
           className="headerIcon"
           source="battlebadge"
-          dimension={width >= 800 ? 75 : 40}
+          dimension={!width || width >= 800 ? 75 : 40}
         />
       </Link>
     </div>

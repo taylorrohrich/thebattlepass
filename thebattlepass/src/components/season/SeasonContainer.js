@@ -5,6 +5,7 @@ import apiRequest from "../../api";
 import Season from "./Season";
 import { season, map } from "../../redux/actions";
 import { wrapComponent } from "./../../utils";
+import { Loading } from "./../generic";
 
 import "./season.scss";
 
@@ -18,21 +19,24 @@ const mapStateToProps = state => {
   return { events, width };
 };
 
+const WrappedSeason = wrapComponent(Season, { disqus: true });
 const SeasonContainer = props => {
   const seasonNumber = props.match.params.number;
   if (seasonNumber && !Number(seasonNumber)) {
     props.history.push(`/error`);
   } else if (!seasonNumber) {
-    apiRequest({ name: "getSeasonsActive" }).then(response => {
-      const number = response.data && response.data.SeasonNumber;
-      props.history.push(number ? `/season/${number}` : `/error`);
-    });
+    apiRequest({ name: "getSeasonsActive" })
+      .then(response => {
+        const number = response.data && response.data.SeasonNumber;
+        props.history.push(number ? `/season/${number}` : `/error`);
+      })
+      .catch(err => props.history.push("error"));
   } else {
-    return <Season seasonNumber={Number(seasonNumber)} {...props} />;
+    return <WrappedSeason seasonNumber={Number(seasonNumber)} {...props} />;
   }
-  return <div className="flex-one" />;
+  return <Loading />;
 };
 export default connect(
   mapStateToProps,
   actionCreators
-)(wrapComponent(SeasonContainer, { disqus: true }));
+)(SeasonContainer);

@@ -48,3 +48,39 @@
 .loadingIcon {
   animation: icon 1s infinite;
 }
+
+.headerContainer {
+  padding: 20px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.headerIcon {
+  width: 25;
+  height: 25;
+}
+
+.footerContainer {
+  color: white;
+  padding: 20px;
+  background-color: #35353a;
+}
+.footerItem {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.footerItem div {
+  margin: 10px;
+}
+
+.navbarContainer {
+  background-color: #35353a;
+  padding: 10px;
+  padding-right: 40px;
+  color: white;
+}
+.navbarTab {
+  color: white;
+  text-decoration: none;
+  margin-left: 40px;
+}

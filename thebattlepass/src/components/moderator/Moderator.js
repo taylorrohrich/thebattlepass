@@ -89,14 +89,22 @@ class Moderator extends React.Component {
         name: "getEvents",
         parameters: { seasonNumber }
       }).then(response => {
-        const parsedEvents = response.data.map(season => {
-          const { Challenges, EventId, SeasonNumber, Style, Title } = season;
+        const parsedEvents = response.data.map(event => {
+          const {
+            Challenges,
+            EventId,
+            SeasonNumber,
+            Style,
+            Title,
+            Order
+          } = event;
           return {
             challenges: Challenges,
             seasonNumber: SeasonNumber,
             eventId: EventId,
             style: Style,
-            title: Title
+            title: Title,
+            order: Order
           };
         });
         updateEvents(parsedEvents);
