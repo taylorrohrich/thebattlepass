@@ -163,7 +163,7 @@ const getChallengesComponents = (
             values: [
               { value: "xp", title: "xp" },
               { value: "battlestar", title: "battlestar" },
-              { value: "mytery", title: "mystery" },
+              { value: "mystery", title: "mystery" },
               { value: "screen", title: "screen" },
               { value: null, title: "none" }
             ],
