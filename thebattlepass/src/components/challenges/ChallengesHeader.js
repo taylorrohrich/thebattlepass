@@ -29,7 +29,7 @@ const ChallengesHeader = props => {
             source="circle"
             svg={true}
             dimension={30}
-            imageColor={isSelected ? "white" : theme[3]}
+            imageColor={isSelected ? theme[3] : "white"}
           />
         </div>
         <div>
@@ -49,7 +49,7 @@ const ChallengesHeader = props => {
             svg={true}
             dimension={30}
             rotate={180}
-            imageColor={toggle ? "white" : theme[3]}
+            imageColor={toggle ? theme[3] : "white"}
           />
         </CSSTransition>
       </div>

@@ -29,7 +29,7 @@ const Challenge = props => {
             dimension={25}
             source={"circle"}
             svg={true}
-            imageColor={isSelected ? "white" : theme ? theme[3] : "darkblue3"}
+            imageColor={isSelected ? (theme ? theme[3] : "darkblue3") : "white"}
           />
         </div>
         <div className="flex-one challengeText ">
