@@ -107,7 +107,7 @@ const getEventsComponents = (entry, entryName, callback, submitCallback) => {
       {
         title: "Order",
         type: "input",
-        value: order && String(order),
+        value: order != null && String(order),
         callback: e => {
           callback(entryName, { order: Number(e) });
         }
@@ -148,7 +148,7 @@ const getSeasonsComponents = (entry, entryName, callback, submitCallback) => {
       {
         title: "Season Name",
         type: "input",
-        value: seasonNumber && String(seasonNumber),
+        value: seasonNumber != null && String(seasonNumber),
         callback: e => {
           callback(entryName, { seasonNumber: Number(e) });
         }
@@ -218,7 +218,7 @@ const getResourcesComponents = (entry, entryName, callback, submitCallback) => {
       {
         title: "Width",
         type: "input",
-        value: width && String(width),
+        value: width != null && String(width),
         callback: e => {
           callback(entryName, { width: Number(e) });
         }
@@ -226,7 +226,7 @@ const getResourcesComponents = (entry, entryName, callback, submitCallback) => {
       {
         title: "Height",
         type: "input",
-        value: height && String(height),
+        value: height != null && String(height),
         callback: e => {
           callback(entryName, { height: Number(e) });
         }
@@ -439,7 +439,7 @@ const getChallengesComponents = (
             {
               title: "Count",
               type: "input",
-              value: count && String(count),
+              value: count != null && String(count),
               callback: e => {
                 const newStages = getNewStages(stages, index, {
                   count: Number(e)
@@ -467,7 +467,7 @@ const getChallengesComponents = (
             {
               title: "Amount",
               type: "input",
-              value: rewardCount && String(rewardCount),
+              value: rewardCount != null && String(rewardCount),
               callback: e => {
                 const newStages = getNewStages(stages, index, {
                   rewardCount: Number(e)

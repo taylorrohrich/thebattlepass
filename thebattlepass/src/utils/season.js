@@ -1,3 +1,4 @@
+import { orderBy } from "lodash";
 const types = ["metaChallenges", "freeChallenges", "bpChallenges"];
 const flattenChallenges = (challenges, keyOne) => {
   return challenges.reduce(
@@ -28,7 +29,8 @@ const flattenChallenges = (challenges, keyOne) => {
   );
 };
 const getSelectedEvents = (events, seasonNumber) => {
-  const flattenedEvents = events.map((event, index) => {
+  const orderedEvents = orderBy(events, ["Order"], ["asc"]);
+  const flattenedEvents = orderedEvents.map((event, index) => {
     const challenges = event.Challenges,
       style = event.Style,
       title = event.Title,

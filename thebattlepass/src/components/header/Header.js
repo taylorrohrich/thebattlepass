@@ -5,11 +5,16 @@ import { Image } from "./../generic";
 
 import "./header.scss";
 
-const Header = () => {
+const Header = props => {
+  const { width } = props;
   return (
     <div className="flex-row flex-start headerContainer">
       <Link to="/">
-        <Image source="battlebadge" dimension={75} />
+        <Image
+          className="headerIcon"
+          source="battlebadge"
+          dimension={width >= 800 ? 75 : 40}
+        />
       </Link>
     </div>
   );

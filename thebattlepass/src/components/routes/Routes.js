@@ -29,11 +29,7 @@ class Routes extends React.Component {
               path="/"
               render={() => <Redirect exact from="/" to="/season/" />}
             />
-            <Route
-              exact
-              path="/season/:number?"
-              component={wrapComponent(Season, true)}
-            />
+            <Route exact path="/season/:number?" component={Season} />
             <PrivateRoute
               exact
               path="/moderator/"

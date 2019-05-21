@@ -7,16 +7,16 @@ import Disqus from "./../components/disqus";
 
 import "./utils.scss";
 
-const wrapComponent = (Component, disqus) => {
+const wrapComponent = (Component, params) => {
   return props => {
     const seasonNumber = props.match.params.number;
     return (
       <div className="flex-one flex-column ">
         {/* <Navbar /> */}
-        <Header />
+        <Header width={props.width} />
         <div className="pageBody flex-one flex-column">
           <Component {...props} />
-          {disqus && (
+          {params.disqus && (
             <div className="disqus">
               <Disqus
                 title={`Season ${seasonNumber}`}

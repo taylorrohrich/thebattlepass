@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import apiRequest from "../../api";
 import Season from "./Season";
 import { season, map } from "../../redux/actions";
+import { wrapComponent } from "./../../utils";
 
 import "./season.scss";
 
@@ -34,4 +35,4 @@ const SeasonContainer = props => {
 export default connect(
   mapStateToProps,
   actionCreators
-)(SeasonContainer);
+)(wrapComponent(SeasonContainer, { disqus: true }));
