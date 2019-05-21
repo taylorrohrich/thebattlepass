@@ -19,8 +19,8 @@ ${
     ? `<img style='width:${popupWidth}px;height:auto;margin:10px' src=${url}/>`
     : ""
 }
-<div style='flex:1' ><b>${challengeTitle}</b></div>
-${title ? `<div style='flex:1' ><i>${title}</i></div>` : ""}
+<div style='flex:1; text-align: center' ><b>${challengeTitle}</b></div>
+${title ? `<div style='flex:1;text-align: center' ><i>${title}</i></div>` : ""}
 </div>`;
 };
 

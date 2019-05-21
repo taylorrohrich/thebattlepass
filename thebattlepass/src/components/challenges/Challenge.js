@@ -29,7 +29,9 @@ const Challenge = props => {
             dimension={25}
             source={"circle"}
             svg={true}
-            imageColor={isSelected ? (theme ? theme[3] : "darkblue3") : "white"}
+            imageColor={
+              isSelected ? (theme ? theme[3] : "darkblue3") : "lightgrey1"
+            }
           />
         </div>
         <div className="flex-one challengeText ">
@@ -48,9 +50,12 @@ const Challenge = props => {
               style={{ backgroundColor: theme && theme[3] }}
               className="challengeProgressBar background-darkblue3"
             />
-            <b>
-              <span className="color-white">0</span> / {count}
-            </b>
+
+            {count !== null && (
+              <b>
+                <span className="color-white">0</span> / {count}
+              </b>
+            )}
           </div>
         </div>
       </div>

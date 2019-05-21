@@ -10,7 +10,8 @@ const colors = {
   beige: "#9dc5ff",
   white: "#ffffff",
   darkgrey1: "#161616",
-  darkgrey2: "#35353a"
+  darkgrey2: "#35353a",
+  lightgrey1: "#c6c6c6"
 };
 const template = {
   default: [

@@ -29,7 +29,7 @@ const ChallengesHeader = props => {
             source="circle"
             svg={true}
             dimension={30}
-            imageColor={isSelected ? theme[3] : "white"}
+            imageColor={isSelected ? theme[3] : "lightgrey1"}
           />
         </div>
         <div>
