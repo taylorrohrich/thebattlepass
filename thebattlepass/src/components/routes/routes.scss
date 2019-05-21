@@ -5,6 +5,7 @@
 .app {
   display: flex;
   flex: 1;
+  font-size: 8px;
   max-width: 2200px;
 }
 /* Custom, iPhone Retina */
@@ -22,7 +23,7 @@
 }
 
 /* Small Devices, Tablets */
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 800px) {
   .app {
     font-size: 16px;
   }

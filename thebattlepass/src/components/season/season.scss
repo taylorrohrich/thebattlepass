@@ -3,7 +3,6 @@
 @import "./../../styles/general.scss";
 
 .seasonBody {
-  padding: 20px;
   background-color: $darkgrey2;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -11,19 +10,35 @@
 }
 .seasonContent {
   background-color: $blue;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
 }
 .eventsContainer {
   background-color: $lightblue3;
   padding: 20px;
-  margin: 10px;
+  padding-bottom: 0;
+  margin-top: 10px;
   border-radius: 10px;
   overflow: scroll;
 }
 .mapContainer {
   background-color: $lightblue3;
-  padding: 20px;
-  margin: 10px;
   border-radius: 10px;
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width: 800px) {
+  .seasonBody {
+    padding: 20px;
+  }
+  .seasonContent {
+    padding: 20px;
+  }
+  .mapContainer {
+    padding: 20px;
+    margin: 10px;
+  }
+  .eventsContainer {
+    margin: 10px;
+  }
 }

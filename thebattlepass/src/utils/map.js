@@ -1,16 +1,14 @@
 import L from "leaflet";
 import images from "./../images";
-import { season } from "../redux/actions";
+
 const updateMapWidth = width => {
   if (width >= 2000) return 1200;
   if (width >= 1600) return 1000;
   if (width >= 1400) return 0.9 * 1400;
   if (width >= 1200) return 0.9 * 1200;
   if (width >= 1000) return 0.9 * 1000;
-  if (width >= 800) return 0.8 * 800;
-  if (width >= 600) return 0.7 * 600;
-  if (width >= 400) return 0.5 * 200;
-  return 0;
+  if (width > 800) return 0.9 * 800;
+  return Math.round(0.9 * width);
 };
 const getPopup = (popupWidth, url, challengeTitle, title) => {
   return `
@@ -37,8 +35,8 @@ const getIcon = (iconWidth, icon) => {
 
 const generateMarkers = (markers, selected, mapDimension, resources) => {
   const innerWidth = window.innerWidth,
-    popupWidth = innerWidth >= 576 ? 400 : 250,
-    iconWidth = innerWidth >= 576 ? 1 : 0.6;
+    popupWidth = innerWidth >= 800 ? 400 : 250,
+    iconWidth = innerWidth >= 800 ? 1 : 0.8;
   Object.keys(selected).reduce((acc1, keyOne) => {
     if (keyOne !== "selected") {
       const event = selected[keyOne];
@@ -84,6 +82,15 @@ const mapRender = ({
     markers.clearLayers();
     generateMarkers(markers, selected, mapDimension, resources);
   }
+  setTimeout(() => {
+    map.invalidateSize();
+  }, 400);
+  map.off("popupclose");
+  map.on("popupclose", () => {
+    setTimeout(() => {
+      map.fitBounds(imageBounds);
+    }, 400);
+  });
   callback && callback();
 };
 
@@ -102,7 +109,6 @@ const init = (
     crs: L.CRS.Simple,
     maxBoundsViscosity: 1.0,
     layers: markers,
-    dragging: false,
     scrollWheelZoom: false
   });
   let overlay = L.imageOverlay(
@@ -110,6 +116,7 @@ const init = (
   );
   overlay.addTo(map);
   if (moderator) {
+    map.off("click");
     map.on("click", e => {
       let coord = e.latlng.toString().split(",");
       let lat = coord[0].split("(");
