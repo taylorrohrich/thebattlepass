@@ -13,9 +13,10 @@ const Image = props => {
     textColor,
     imageColor,
     svg,
-    rotate
+    rotate,
+    href
   } = props;
-  return (
+  const Image = (
     <div
       className={"flex-column justify-center align-center"}
       style={{ margin }}
@@ -24,6 +25,14 @@ const Image = props => {
       <b className={`color-${textColor}`}>{text}</b>
     </div>
   );
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {Image}
+      </a>
+    );
+  }
+  return Image;
 };
 const getColor = imageColor => {
   if (imageColor.charAt(0) === "#") {

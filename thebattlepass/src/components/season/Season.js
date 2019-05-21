@@ -2,6 +2,7 @@ import React from "react";
 
 import Challenges from "../challenges";
 import Map from "./../map";
+import { Loading } from "./../generic";
 import { getSelectedEvents, updateMapWidth } from "./../../utils";
 import apiRequest from "./../../api";
 
@@ -63,7 +64,7 @@ class Season extends React.Component {
   render() {
     const { seasonNumber, events, width } = this.props;
     if (!events) {
-      return <div className="flex-one" />;
+      return <Loading />;
     }
     return (
       <div className="flex-column flex-one">

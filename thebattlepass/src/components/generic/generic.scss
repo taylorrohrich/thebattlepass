@@ -29,3 +29,22 @@
   width: 50px;
   height: 50px;
 }
+
+@keyframes icon {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
+  }
+}
+.loadingContainer {
+  height: 100vh;
+}
+
+.loadingIcon {
+  animation: icon 1s infinite;
+}

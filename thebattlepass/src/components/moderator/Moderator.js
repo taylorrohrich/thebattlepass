@@ -2,7 +2,7 @@ import React from "react";
 
 import Tab from "./Tab";
 import Map from "./../map";
-import { SelectModal } from "./../generic";
+import { SelectModal, Loading } from "./../generic";
 import apiRequest from "./../../api";
 
 import "./moderator.scss";
@@ -142,7 +142,7 @@ class Moderator extends React.Component {
       updateEvent
     } = this.props;
     if (!seasons) {
-      return <div />;
+      return <Loading />;
     }
     if (!seasonNumber) {
       return (

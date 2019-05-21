@@ -36,7 +36,7 @@ const getIcon = (iconWidth, icon) => {
 const generateMarkers = (markers, selected, mapDimension, resources) => {
   const innerWidth = window.innerWidth,
     popupWidth = innerWidth >= 800 ? 400 : 250,
-    iconWidth = innerWidth >= 800 ? 1 : 0.8;
+    iconWidth = innerWidth >= 800 ? 1 : 0.6;
   Object.keys(selected).reduce((acc1, keyOne) => {
     if (keyOne !== "selected") {
       const event = selected[keyOne];
