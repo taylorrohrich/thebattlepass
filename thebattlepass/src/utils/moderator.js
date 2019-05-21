@@ -15,6 +15,7 @@ const getDefaultState = (tab, entry, params) => {
         [
           { name: "eventId" },
           { name: "style", defaultValue: "default" },
+          { name: "order" },
           { name: "title" },
           { name: "challenges", defaultValue: [] },
           { name: "seasonNumber", defaultValue: params.seasonNumber }
@@ -83,7 +84,7 @@ const getNewStages = (stages, i, obj) => {
 
 const getEventsComponents = (entry, entryName, callback, submitCallback) => {
   const isNew = entryName === "events-new";
-  const { title, style } = entry;
+  const { title, style, order } = entry;
   return [
     [
       {
@@ -101,6 +102,14 @@ const getEventsComponents = (entry, entryName, callback, submitCallback) => {
         values: [{ value: "default", title: "Default" }],
         callback: e => {
           callback(entryName, { ...entry, style: e });
+        }
+      },
+      {
+        title: "Order",
+        type: "input",
+        value: order && String(order),
+        callback: e => {
+          callback(entryName, { order: Number(e) });
         }
       }
     ],

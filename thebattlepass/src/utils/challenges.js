@@ -30,7 +30,7 @@ const mapChallengeCollections = (
     (key, index) => {
       const challengeSet = challenges[key];
       const header = getHeader(key);
-      if (challengeSet.length)
+      if (challengeSet.length) {
         return (
           <ChallengeCollection
             key={`challengeCollection-${index}`}
@@ -42,6 +42,8 @@ const mapChallengeCollections = (
             switchSelected={switchSelected}
           />
         );
+      }
+      return null;
     },
     []
   );

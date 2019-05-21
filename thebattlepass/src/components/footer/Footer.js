@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Image } from "./../generic";
-import { gitbub, reddit } from "./../../images";
 
 import "./footer.scss";
 
