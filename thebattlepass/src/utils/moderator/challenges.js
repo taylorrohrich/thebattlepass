@@ -165,6 +165,7 @@ const getChallengesComponents = (
               { value: "battlestar", title: "battlestar" },
               { value: "mystery", title: "mystery" },
               { value: "screen", title: "screen" },
+              { value: "puzzle", title: "puzzle" },
               { value: "none", title: "none" }
             ],
             callback: e => {

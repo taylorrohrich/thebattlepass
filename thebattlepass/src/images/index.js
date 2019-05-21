@@ -8,6 +8,7 @@ import github from "./github.png";
 import mystery from "./mystery.png";
 import screen from "./screen.png";
 import reddit from "./reddit.png";
+import puzzle from "./puzzle.png";
 export default {
   battlestar,
   xp,
