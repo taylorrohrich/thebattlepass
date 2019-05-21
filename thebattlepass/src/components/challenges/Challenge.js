@@ -55,7 +55,7 @@ const Challenge = props => {
         </div>
       </div>
       <div className="flex-row justify-space-between">
-        {rewardType && (
+        {rewardType !== "none" && (
           <Image
             dimension={50}
             source={rewardType}

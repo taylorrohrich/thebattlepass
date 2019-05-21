@@ -1,4 +1,5 @@
 import React from "react";
+import ReactGA from "react-ga";
 
 import Challenges from "../challenges";
 import Map from "./../map";
@@ -45,6 +46,7 @@ const SeasonBody = props => {
 };
 class Season extends React.Component {
   componentDidMount() {
+    ReactGA.pageview(this.props.location.pathname || window.location.pathname);
     const { events, seasonNumber, setSeason, switchIsUpdated } = this.props;
     if (!events) {
       apiRequest({
@@ -60,7 +62,7 @@ class Season extends React.Component {
             this.props.history.push("/error");
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => this.props.history.push("/error"));
     }
   }
   render() {

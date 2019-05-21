@@ -165,7 +165,7 @@ const getChallengesComponents = (
               { value: "battlestar", title: "battlestar" },
               { value: "mystery", title: "mystery" },
               { value: "screen", title: "screen" },
-              { value: null, title: "none" }
+              { value: "none", title: "none" }
             ],
             callback: e => {
               const newStages = getNewStages(stages, index, {
