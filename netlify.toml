@@ -7,6 +7,12 @@
   publish = "thebattlepass/build"
 
 [[redirects]]
+  from = "https://fort-friend.com/*"
+  to = "https://www.thebattlepass.com/:splat"
+  status = 301
+  foce = true
+
+[[redirects]]
   from = "https://www.fort-friend.com/*"
   to = "https://www.thebattlepass.com/:splat"
   status = 301
