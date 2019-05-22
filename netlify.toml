@@ -10,13 +10,13 @@
   from = "https://fort-friend.com/*"
   to = "https://www.thebattlepass.com/:splat"
   status = 301
-  foce = true
+  force = true
 
 [[redirects]]
   from = "https://www.fort-friend.com/*"
   to = "https://www.thebattlepass.com/:splat"
   status = 301
-  foce = true
+  force = true
 
 [[redirects]]
   from = "/api/*"
