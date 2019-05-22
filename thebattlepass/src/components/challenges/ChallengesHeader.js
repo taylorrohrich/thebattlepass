@@ -28,7 +28,7 @@ const ChallengesHeader = props => {
             margin={20}
             source="circle"
             svg={true}
-            dimension={30}
+            dimension={25}
             imageColor={isSelected ? theme[3] : "lightgrey1"}
           />
         </div>
@@ -47,7 +47,7 @@ const ChallengesHeader = props => {
             margin={20}
             source="arrow"
             svg={true}
-            dimension={30}
+            dimension={25}
             rotate={180}
             imageColor={toggle ? theme[3] : "white"}
           />

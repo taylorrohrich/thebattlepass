@@ -26,7 +26,7 @@ const Challenge = props => {
       <div className="flex-row justify-space-between align-center flex-one">
         <div className="pointer" onClick={callback}>
           <Image
-            dimension={25}
+            dimension={20}
             source={"circle"}
             svg={true}
             imageColor={
@@ -62,7 +62,7 @@ const Challenge = props => {
       <div className="flex-row justify-space-between">
         {rewardType !== "none" && (
           <Image
-            dimension={50}
+            dimension={40}
             source={rewardType}
             textColor="white"
             text={rewardCount}

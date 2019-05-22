@@ -3,12 +3,8 @@ import L from "leaflet";
 import images from "./../images";
 
 const updateMapWidth = width => {
-  if (width >= 2000) return 1200;
-  if (width >= 1600) return 1000;
-  if (width >= 1400) return 0.9 * 1400;
-  if (width >= 1200) return 0.9 * 1200;
-  if (width >= 1000) return 0.8 * 1000;
-  if (width >= 800) return 0.8 * 800;
+  if (width >= 1400) return 800;
+  if (width >= 1200) return 700;
   return Math.round(0.9 * width);
 };
 const getPopup = (popupWidth, url, challengeTitle, title) => {

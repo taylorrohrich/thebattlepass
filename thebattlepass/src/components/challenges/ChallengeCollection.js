@@ -9,7 +9,7 @@ const getHeader = header => {
   const { title, image } = header;
   return (
     <div className="challengesCollectionHeader flex-row justify-start align-center">
-      <Image margin={10} dimension={50} source={image} />
+      <Image margin={10} dimension={40} source={image} />
       <div className="color-beige">
         <b>{title}</b>
       </div>

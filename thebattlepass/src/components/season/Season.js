@@ -28,7 +28,7 @@ const SeasonBody = props => {
     <div className={`seasonBody flex-column flex-one`}>
       <div
         className={`seasonContent flex-one flex-${
-          width >= 1600 ? "row" : "column-reverse"
+          width >= 1200 ? "row" : "column-reverse"
         }`}
       >
         <div
