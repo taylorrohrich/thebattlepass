@@ -20,6 +20,8 @@ const mapStateToProps = state => {
 };
 
 const WrappedSeason = wrapComponent(Season, { disqus: true });
+
+const WrappedLoading = wrapComponent(Loading, { disqus: true });
 const SeasonContainer = props => {
   const seasonNumber = props.match.params.number;
   if (seasonNumber && !Number(seasonNumber)) {
@@ -34,11 +36,7 @@ const SeasonContainer = props => {
   } else {
     return <WrappedSeason seasonNumber={Number(seasonNumber)} {...props} />;
   }
-  return (
-    <div className="flex-one justy-center align-center">
-      <Loading />
-    </div>
-  );
+  return <WrappedLoading {...props} />;
 };
 export default connect(
   mapStateToProps,

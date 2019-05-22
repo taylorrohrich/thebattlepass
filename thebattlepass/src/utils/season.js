@@ -13,7 +13,7 @@ const flattenChallenges = (challenges, keyOne) => {
         return numStages > 1
           ? {
               ...stage,
-              total: numStages + 1,
+              total: numStages,
               stage: index2 + 1,
               keyOne,
               keyTwo
