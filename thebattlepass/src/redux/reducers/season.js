@@ -1,3 +1,5 @@
+import { getNewSelected } from "./../../utils";
+
 const initialState = {
   seasonNumber: null,
   selected: null,
@@ -19,45 +21,7 @@ export default (state = initialState, action) => {
     case "SWITCH_SELECTED": {
       const { keyOne, keyTwo } = action,
         { selected } = state,
-        selectedEvent = selected[keyOne];
-      if (!keyTwo) {
-        const toggleSelected = !selectedEvent.selected,
-          newSelectedEvent = Object.keys(selectedEvent).reduce((acc, key) => {
-            if (key === "selected") {
-              return { ...acc, [key]: toggleSelected };
-            }
-            return {
-              ...acc,
-              [key]: { ...selectedEvent[key], selected: toggleSelected }
-            };
-          }, {});
-        const newSelected = { ...selected, [keyOne]: newSelectedEvent };
-        return {
-          ...state,
-          selected: newSelected
-        };
-      }
-      const selectedChallenge = selectedEvent[keyTwo],
-        toggleSelected = !selectedChallenge.selected,
-        newSelectedChallenge = {
-          ...selectedChallenge,
-          selected: toggleSelected
-        };
-      const newSelectedEvent = {
-        ...selectedEvent,
-        [keyTwo]: newSelectedChallenge
-      };
-      const toggleWeek =
-        Object.keys(newSelectedEvent).filter(key => {
-          return (
-            newSelectedEvent[key] !== "selected" &&
-            newSelectedEvent[key].selected === false
-          );
-        }).length === 0;
-      const newSelected = {
-        ...selected,
-        [keyOne]: { ...newSelectedEvent, selected: toggleWeek }
-      };
+        newSelected = getNewSelected(selected, keyOne, keyTwo);
       return {
         ...state,
         selected: newSelected

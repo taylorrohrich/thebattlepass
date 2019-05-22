@@ -1,8 +1,8 @@
-import { getSelectedEvents } from "./season";
+import { getSelectedEvents, getNewSelected } from "./season";
 import { mapChallenges, mapChallengeCollections } from "./challenges";
 import { PrivateRoute, netlifyAuth } from "./routes";
 import { updateMapWidth, generateMarkers, mapRender, init } from "./map";
-import { wrapComponent } from "./general";
+import { wrapComponent, updateLocalStorage } from "./general";
 import { getDefaultState, getEntryName, getComponents } from "./moderator";
 export {
   getSelectedEvents,
@@ -17,5 +17,7 @@ export {
   mapRender,
   init,
   PrivateRoute,
-  netlifyAuth
+  netlifyAuth,
+  updateLocalStorage,
+  getNewSelected
 };

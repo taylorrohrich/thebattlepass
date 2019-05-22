@@ -47,23 +47,21 @@ const SeasonBody = props => {
 class Season extends React.Component {
   componentDidMount() {
     ReactGA.pageview(this.props.location.pathname || window.location.pathname);
-    const { events, seasonNumber, setSeason, switchIsUpdated } = this.props;
-    if (!events) {
-      apiRequest({
-        name: "getEvents",
-        parameters: { seasonNumber }
+    const { seasonNumber, setSeason, switchIsUpdated } = this.props;
+    apiRequest({
+      name: "getEvents",
+      parameters: { seasonNumber }
+    })
+      .then(response => {
+        const events = response.data;
+        if (events.length) {
+          setSeason(getSelectedEvents(events, seasonNumber));
+          switchIsUpdated(true);
+        } else {
+          this.props.history.push("/error");
+        }
       })
-        .then(response => {
-          const events = response.data;
-          if (events.length) {
-            setSeason(getSelectedEvents(events, seasonNumber));
-            switchIsUpdated(true);
-          } else {
-            this.props.history.push("/error");
-          }
-        })
-        .catch(err => this.props.history.push("/error"));
-    }
+      .catch(err => this.props.history.push("/error"));
   }
   render() {
     const { seasonNumber, events, width } = this.props;

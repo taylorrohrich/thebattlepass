@@ -134,9 +134,11 @@ const getChallengesComponents = (
           {
             title: "Icon",
             type: "select",
-            values: resources.map(resource => {
-              return { title: resource.title, value: resource.resourceId };
-            }),
+            values: resources
+              .map(resource => {
+                return { title: resource.title, value: resource.resourceId };
+              })
+              .concat({ title: "none", value: null }),
             selected: iconId,
             callback: e => {
               const newStages = getNewStages(stages, index, { iconId: e });

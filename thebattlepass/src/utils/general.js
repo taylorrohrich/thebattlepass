@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Footer, Header, Navbar, Disqus } from "./../components/generic";
+import { getNewSelected } from "./season";
 
 import "./utils.scss";
 
@@ -43,4 +44,10 @@ function getBase64(file) {
     reader.onerror = error => reject(error);
   });
 }
-export { wrapComponent, getBase64 };
+
+const updateLocalStorage = (seasonNumber, keyOne, keyTwo) => {
+  const local = JSON.parse(localStorage.getItem("season" + seasonNumber));
+  const newLocal = getNewSelected(local, keyOne, keyTwo);
+  localStorage.setItem("season" + seasonNumber, JSON.stringify(newLocal));
+};
+export { wrapComponent, getBase64, updateLocalStorage };

@@ -2,7 +2,7 @@ import React from "react";
 import { CSSTransition } from "react-transition-group";
 
 import ChallengesHeader from "./ChallengesHeader";
-import { mapChallengeCollections } from "./../../utils";
+import { mapChallengeCollections, updateLocalStorage } from "./../../utils";
 
 import "./challenges.scss";
 
@@ -24,6 +24,7 @@ class Challenges extends React.Component {
     const keyOne = `${seasonNumber}-${index}`;
     const switchAndUpdate = (keyOne, keyTwo) => {
       switchSelected(keyOne, keyTwo);
+      updateLocalStorage(seasonNumber, keyOne, keyTwo);
       switchIsUpdated(true);
     };
     return (
