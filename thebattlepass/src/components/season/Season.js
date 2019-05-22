@@ -32,7 +32,7 @@ const SeasonBody = props => {
         }`}
       >
         <div
-          style={{ maxHeight: width >= 1600 ? updateMapWidth(width) : null }}
+          style={{ maxHeight: width >= 1200 ? updateMapWidth(width) : null }}
           className={`eventsContainer flex-column flex-one justify-start `}
         >
           {mapEvents(events, seasonNumber)}
