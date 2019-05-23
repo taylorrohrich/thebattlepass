@@ -20,7 +20,8 @@ const getEventsComponents = (entry, entryName, callback, submitCallback) => {
         values: [
           { value: "default", title: "Default" },
           { value: "fortbyte", title: "Fortbyte" },
-          { value: "utopia", title: "Utopia" }
+          { value: "utopia", title: "Utopia" },
+          { value: "downtown", title: "Downtown" }
         ],
         callback: e => {
           callback(entryName, { ...entry, style: e });

@@ -21,6 +21,7 @@ const template = {
     colors.darkblue1
   ],
   fortbyte: ["#0A0324", "#7C4870", "#D6AACA", "#CD5EA0"],
-  utopia: ["#724073", "#A44879", "#F99FA9", "#FC466F"]
+  utopia: ["#724073", "#A44879", "#F99FA9", "#FC466F"],
+  downtown: ["#262626", "#7a1e23", "#e59397", "#d30200"]
 };
 export { colors, template };
