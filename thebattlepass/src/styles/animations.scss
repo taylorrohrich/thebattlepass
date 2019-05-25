@@ -30,3 +30,18 @@
   opacity: 0;
   transition: opacity 500ms;
 }
+
+.left-enter {
+  right: -50%;
+}
+.left-enter-active {
+  right: 0;
+  transition: right 500ms;
+}
+.left-exit {
+  right: 0;
+}
+.left-exit-active {
+  right: -50%;
+  transition: right 500ms;
+}

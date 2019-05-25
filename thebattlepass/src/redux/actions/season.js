@@ -18,6 +18,12 @@ export default {
       selected
     };
   },
+  setSeasonList: seasonList => {
+    return {
+      type: "SET_SEASON_LIST",
+      seasonList
+    };
+  },
   setSeason: ({ selected, events, seasonNumber }) => {
     return {
       type: "SET_SEASON",

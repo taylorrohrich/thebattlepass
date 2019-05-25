@@ -13,7 +13,8 @@ const Header = props => {
         <Image
           className="headerIcon"
           source="battlebadge"
-          dimension={!width || width >= 800 ? 50 : 40}
+          margin={!width || width >= 1200 ? 10 : 0}
+          dimension={!width || width >= 1200 ? 55 : 40}
         />
       </Link>
     </div>

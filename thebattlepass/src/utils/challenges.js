@@ -9,11 +9,11 @@ const getHeader = challengeType => {
   switch (challengeType) {
     case "bpChallenges":
       image = "battlebadge";
-      title = "BATTLE PASS CHALLENGES";
+      title = "Battle Pass Challenges";
       break;
     case "freeChallenges":
       image = "battlebadgeGrey";
-      title = "FREE CHALLENGES";
+      title = "Free Challenges";
       break;
     default:
       image = null;

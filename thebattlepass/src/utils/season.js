@@ -52,7 +52,7 @@ const getSelectedEvents = (events, seasonNumber) => {
   });
   const selected = flattenedEvents.reduce((acc1, event, index) => {
     const keyOne = `${seasonNumber}-${index}`,
-      challenges = event.challenges;
+      { challenges, style } = event;
     const eventSet = Object.keys(challenges).reduce((acc2, key) => {
       const challengeSet = challenges[key].reduce((acc3, challenge) => {
         const { coordinates, iconId, title, keyTwo } = challenge;
@@ -62,7 +62,8 @@ const getSelectedEvents = (events, seasonNumber) => {
             iconId,
             coordinates,
             selected: getFromLocalStorage(local, keyOne, keyTwo),
-            title
+            title,
+            style
           }
         };
       }, {});

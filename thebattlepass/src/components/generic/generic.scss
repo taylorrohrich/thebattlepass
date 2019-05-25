@@ -63,7 +63,7 @@
 .footerContainer {
   color: white;
   padding: 20px;
-  background-color: #35353a;
+  background-color: $darkgrey3;
 }
 .footerItem {
   margin-left: 10px;
@@ -74,13 +74,44 @@
 }
 
 .navbarContainer {
-  background-color: #35353a;
-  padding: 10px;
-  padding-right: 40px;
+  background-color: $darkgrey2;
   color: white;
 }
 .navbarTab {
   color: white;
   text-decoration: none;
-  margin-left: 40px;
+  padding: 10px;
+}
+.navbarTab:hover {
+  background-color: $darkgrey3;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+  flex-direction: column;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: $darkgrey2;
+  min-width: 200px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  border-color: $lightgrey1;
+  z-index: 1;
+}
+
+.sideMenuContainer {
+  position: fixed;
+  z-index: 999;
+  background-color: $darkgrey2;
+  border-style: solid;
+  border-width: 0;
+  border-left-width: 5px;
+  border-color: $lightgrey1;
+  right: 0;
+  top: 0;
+  width: 200px;
+  height: 100vh;
 }

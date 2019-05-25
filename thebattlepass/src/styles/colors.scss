@@ -10,6 +10,8 @@ $beige: #9dc5ff;
 $white: #ffffff;
 $darkgrey1: #161616;
 $darkgrey2: #35353a;
+$darkgrey3: #303030;
+$lightgrey1: #c6c6c6;
 
 .background-lightblue1 {
   background-color: $lightblue1;
@@ -43,6 +45,12 @@ $darkgrey2: #35353a;
 }
 .background-darkgrey2 {
   background-color: $darkgrey2;
+}
+.background-darkgrey3 {
+  background-color: $darkgrey3;
+}
+.background-lightgrey1 {
+  background-color: $lightgrey1;
 }
 
 .color-lightblue1 {
@@ -80,4 +88,10 @@ $darkgrey2: #35353a;
 }
 .color-darkgrey2 {
   color: $darkgrey2;
+}
+.color-darkgrey3 {
+  color: $darkgrey2;
+}
+.color-lightgrey1 {
+  color: $lightgrey1;
 }

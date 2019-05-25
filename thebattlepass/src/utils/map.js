@@ -1,6 +1,7 @@
 import L from "leaflet";
 
 import images from "./../images";
+import { template } from "./../styles";
 
 const updateMapWidth = width => {
   if (width >= 1400) return 800;
@@ -8,15 +9,20 @@ const updateMapWidth = width => {
   return Math.round(0.9 * width);
 };
 const getPopup = (popupWidth, url, challengeTitle, title) => {
+  const headerColor = template.default[2];
   return `
-<div style='display:flex;justiy-content: center;flex-direction: column; align-items: center;'>
+<div class='font-luckiest-guy' style='display:flex;justiy-content:center;flex-direction: column; align-items: center;'>
 ${
   url
-    ? `<img style='width:${popupWidth}px;height:auto;margin:10px' src=${url}/>`
+    ? `<img class='popupImage' style='width:${popupWidth}px;height:auto' src='${url}'/>`
     : ""
 }
-<div style='flex:1; text-align: center' ><b>${challengeTitle}</b></div>
-${title ? `<div style='flex:1;text-align: center' ><i>${title}</i></div>` : ""}
+<div style='flex:1; text-align: center;color: ${headerColor}' ><b>${challengeTitle}</b></div>
+${
+  title
+    ? `<div class='l' style='flex:1;text-align: center;color: white' ><i>${title}</i></div>`
+    : ""
+}
 </div>`;
 };
 
@@ -40,7 +46,7 @@ const generateMarkers = (markers, selected, mapDimension, resources) => {
       Object.keys(event).reduce((acc2, keyTwo) => {
         const challenge = event[keyTwo],
           isSelected = challenge.selected,
-          coordinates = challenge.coordinates,
+          { coordinates } = challenge,
           challengeTitle = challenge.title;
 
         if (isSelected) {
@@ -73,8 +79,8 @@ const mapRender = ({
 }) => {
   const imageBounds = [[0, 0], [mapDimension, mapDimension]];
   overlay.setBounds(imageBounds);
-  map.setMaxBounds(imageBounds);
   map.fitBounds(imageBounds);
+  map.setMaxBounds(imageBounds);
   if (markers && selected && resources) {
     markers.clearLayers();
     generateMarkers(markers, selected, mapDimension, resources);
@@ -86,8 +92,14 @@ const mapRender = ({
   map.on("popupclose", () => {
     setTimeout(() => {
       map.fitBounds(imageBounds);
+      map.setMaxBounds(imageBounds);
     }, 400);
   });
+  map.off("popupopen");
+  map.on("popupopen", () => {
+    map.setMaxBounds();
+  });
+
   callback && callback();
 };
 

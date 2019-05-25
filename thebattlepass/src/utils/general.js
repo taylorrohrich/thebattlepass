@@ -10,7 +10,7 @@ const wrapComponent = (Component, params = {}) => {
     const seasonNumber = props.match.params.number;
     return (
       <div className="flex-one flex-column ">
-        {/* <Navbar /> */}
+        <Navbar />
         <Header width={props.width} />
         <div className="pageBody flex-one flex-column">
           <Component {...props} />

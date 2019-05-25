@@ -3,7 +3,8 @@ import { getNewSelected } from "./../../utils";
 const initialState = {
   seasonNumber: null,
   selected: null,
-  events: null
+  events: null,
+  seasonList: null
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -32,6 +33,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         selected
+      };
+    }
+    case "SET_SEASON_LIST": {
+      const { seasonList } = action;
+      return {
+        ...state,
+        seasonList
       };
     }
     case "SET_SEASON": {

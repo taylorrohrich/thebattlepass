@@ -32,7 +32,22 @@ class Routes extends React.Component {
             <Route exact path="/season/:number?" component={Season} />
             <PrivateRoute exact path="/moderator/" component={Moderator} />
             <Route exact path="/login" component={Authentication} />
-            <Route component={Error} />
+            <Route exact path="/error/:type?" component={Error} />
+            <Route
+              exact
+              path="/contact"
+              render={() => (
+                <Redirect exact from="/contact" to="/error/construction" />
+              )}
+            />
+            <Route
+              exact
+              path="/subscribe"
+              render={() => (
+                <Redirect exact from="/subscribe" to="/error/construction" />
+              )}
+            />
+            <Route render={() => <Redirect exact from="/" to="/error" />} />
           </Switch>
         </Router>
       </div>

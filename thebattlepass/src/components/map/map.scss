@@ -2,3 +2,25 @@
 @import "./../../styles/fonts.scss";
 @import "./../../styles/general.scss";
 @import "./../../styles/animations.scss";
+
+.leaflet-popup-content-wrapper {
+  background-color: $lightblue1;
+  border-radius: 0;
+  color: white;
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 15px;
+  padding: 10px;
+  border-color: $lightblue2;
+}
+
+.leaflet-popup-close-button {
+  color: white;
+}
+
+.popupImage {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: $lightblue2;
+}
