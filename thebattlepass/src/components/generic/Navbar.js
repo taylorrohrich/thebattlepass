@@ -73,11 +73,11 @@ const mapTabs = (tabs, params, isSideMenu) => {
 
 class SideMenu extends React.Component {
   componentDidMount() {
-    document.addEventListener("mousedown", this.handleClickOutside);
+    window.addEventListener("mousedown", this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener("mousedown", this.handleClickOutside);
+    window.removeEventListener("mousedown", this.handleClickOutside);
   }
 
   setWrapperRef = node => {
@@ -111,6 +111,7 @@ class SideMenu extends React.Component {
     );
   }
 }
+
 class Navbar extends React.Component {
   componentDidMount() {
     const { params, setSeasonList } = this.props;

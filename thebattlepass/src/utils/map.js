@@ -118,7 +118,8 @@ const init = (
     crs: L.CRS.Simple,
     maxBoundsViscosity: 1.0,
     layers: markers,
-    scrollWheelZoom: false
+    scrollWheelZoom: false,
+    attributionControl: false
   });
   let overlay = L.imageOverlay(
     images[`fnmap${seasonNumber}`] || images.placeholder
