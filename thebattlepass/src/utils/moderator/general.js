@@ -56,7 +56,8 @@ const getDefaultState = (tab, entry, params) => {
               {
                 coordinates: [],
                 rewardCount: null,
-                rewardType: null,
+                rewardType: "none",
+                iconId: "none",
                 title: null,
                 count: null
               }

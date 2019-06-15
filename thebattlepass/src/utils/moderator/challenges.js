@@ -138,7 +138,7 @@ const getChallengesComponents = (
               .map(resource => {
                 return { title: resource.title, value: resource.resourceId };
               })
-              .concat({ title: "none", value: null }),
+              .concat({ title: "none", value: "none" }),
             selected: iconId,
             callback: e => {
               const newStages = getNewStages(stages, index, { iconId: e });
