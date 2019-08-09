@@ -1,5 +1,5 @@
 import axios from "axios";
-import { forEach, some } from "lodash";
+import { some } from "lodash";
 
 const apiRequest = async ({ name, body, parameters, formData }) => {
   if (parameters && some(parameters, parameter => parameter === null)) {
@@ -11,7 +11,7 @@ const apiRequest = async ({ name, body, parameters, formData }) => {
           ? "https://i1os4xxzw4.execute-api.us-east-2.amazonaws.com/prod"
           : "/api",
       url = websiteUrl + routes[name][0],
-      data = formData ? formDataBody({ name, formData }) : body,
+      data = body,
       config = formData
         ? { headers: { "Content-Type": "multipart/form-data" } }
         : null,
@@ -28,12 +28,6 @@ const apiRequest = async ({ name, body, parameters, formData }) => {
   }
 };
 
-export default apiRequest;
-const formDataBody = ({ name, formData }) => {
-  let bodyFormData = new FormData();
-  forEach(formData, (value, key) => bodyFormData.set(key, value));
-  return bodyFormData;
-};
 const routes = {
   getEvents: ["/events", "GET"],
   getResources: ["/resources", "GET"],
@@ -49,3 +43,5 @@ const routes = {
   postSeasonsDelete: ["/seasons/delete", "POST"],
   postSeasonsUpdate: ["/seasons/update", "POST"]
 };
+
+export default apiRequest;

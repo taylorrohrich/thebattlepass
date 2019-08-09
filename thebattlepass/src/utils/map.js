@@ -57,7 +57,10 @@ const generateMarkers = (markers, selected, mapDimension, resources) => {
               maxWidth: popupWidth
             }).setContent(getPopup(popupWidth, url, challengeTitle, title));
             let marker = L.marker([x * mapDimension, y * mapDimension], {
-              icon: getIcon(iconWidth, resources[challenge.iconId])
+              icon: getIcon(
+                iconWidth,
+                resources[challenge.iconId] || { url: images.battlebadge }
+              )
             }).bindPopup(popup);
             markers.addLayer(marker);
           });
